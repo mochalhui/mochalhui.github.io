@@ -63,6 +63,63 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-ts-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/12/ts-1/">ts 体操</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/12/ts-1/" class="article-date">
+  <time datetime="2022-01-12T10:29:48.000Z" itemprop="datePublished">2022-01-12</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="2-获取函数返回类型"><a href="#2-获取函数返回类型" class="headerlink" title="2 - 获取函数返回类型"></a>2 - 获取函数返回类型</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>利用infer的类型推导，构造出函数和他的返回值</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyReturnType&lt;T&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; infer P ? P : <span class="built_in">never</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-实现Omit"><a href="#3-实现Omit" class="headerlink" title="3 - 实现Omit"></a>3 - 实现Omit</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>利用Exclude</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyOmit&lt;T, K&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> Exclude&lt;keyof T, K&gt;] = T[P]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/12/ts-1/" data-id="ckyclf8ra00030cn00bfb8453" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-贪心-3" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -112,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/%E8%B4%AA%E5%BF%83-3/" data-id="ckyb6y5tt000k1rn00mdi2il1" class="article-share-link">
+      <a data-url="http://example.com/2022/01/12/%E8%B4%AA%E5%BF%83-3/" data-id="ckyclf8ro000l0cn0fmnlcike" class="article-share-link">
         Share
       </a>
       
@@ -171,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/08/%E6%A0%88-3/" data-id="ckyb6y5tq000d1rn04zorf8fx" class="article-share-link">
+      <a data-url="http://example.com/2022/01/08/%E6%A0%88-3/" data-id="ckyclf8rj000d0cn026xg24ze" class="article-share-link">
         Share
       </a>
       
@@ -235,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/06/dfs-1/" data-id="ckyb6y5tc00001rn02dokcvi2" class="article-share-link">
+      <a data-url="http://example.com/2022/01/06/dfs-1/" data-id="ckyclf8r000000cn03mhvdbnm" class="article-share-link">
         Share
       </a>
       
@@ -297,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/06/%E6%A0%88-2/" data-id="ckyb6y5to00091rn02hls9puv" class="article-share-link">
+      <a data-url="http://example.com/2022/01/06/%E6%A0%88-2/" data-id="ckyclf8ri000b0cn0g5db3ncm" class="article-share-link">
         Share
       </a>
       
@@ -355,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckyb6y5tw000m1rn09tbadznl" class="article-share-link">
+      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckyclf8rl000f0cn0gka9f39f" class="article-share-link">
         Share
       </a>
       
@@ -461,7 +518,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/04/react-1/" data-id="ckyb6y5ti00011rn057mh6ns9" class="article-share-link">
+      <a data-url="http://example.com/2022/01/04/react-1/" data-id="ckyclf8r600010cn04rl0b5bd" class="article-share-link">
         Share
       </a>
       
@@ -521,7 +578,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/03/%E7%9F%A9%E9%98%B5-1/" data-id="ckyb6y5tx000o1rn0ah916sl3" class="article-share-link">
+      <a data-url="http://example.com/2022/01/03/%E7%9F%A9%E9%98%B5-1/" data-id="ckyclf8rp000m0cn0fsis4jyh" class="article-share-link">
         Share
       </a>
       
@@ -582,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckyb6y5to00081rn01bdyb6zq" class="article-share-link">
+      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckyclf8rg00090cn06qsv82wl" class="article-share-link">
         Share
       </a>
       
@@ -636,68 +693,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" data-id="ckyb6y5tx000q1rn0h2hx8nar" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-滑动窗口-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/">leetcode 438 找到字符串中所有字母异位词</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" class="article-date">
-  <time datetime="2021-12-27T07:03:26.000Z" itemprop="datePublished">2021-12-27</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">找到字符串中所有字母异位词</a></p>
-<p>滑动窗口的题关键思路是，考虑什么时候 break；能够快速的 break 才是避免超时的关键</p>
-<p>这里还忘记了深拷贝 <code>JSON.parse(JSON.stringify(obj))</code> ,复习下</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">p</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findAnagrams = <span class="function"><span class="keyword">function</span> (<span class="params">s, p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; p.length; i++) &#123;</span><br><span class="line">    obj[p[i]] = obj[p[i]] ? obj[p[i]] + <span class="number">1</span> : <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = p.length - <span class="number">1</span>,</span><br><span class="line">    len = p.length,</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (right &lt; s.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isSame(s.substr(left, len), obj)) res.push(left);</span><br><span class="line">    left++;</span><br><span class="line">    right++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSame</span>(<span class="params">a, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> buff = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!buff[a[j]]) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      buff[a[j]]--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/438.png" alt="438"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" data-id="ckyb6y5tq000b1rn001g08c4h" class="article-share-link">
+      <a data-url="http://example.com/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" data-id="ckyclf8rt000q0cn032b5bug5" class="article-share-link">
         Share
       </a>
       
