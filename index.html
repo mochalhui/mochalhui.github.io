@@ -63,6 +63,68 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-react-3" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/23/react-3/">react 严格模式 React.StrictMode</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/23/react-3/" class="article-date">
+  <time datetime="2022-01-23T14:09:23.000Z" itemprop="datePublished">2022-01-23</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h2><p>StrictMode 是一个用以标记出应用中存在潜在问题的工具，不会渲染任何真实的UI，它为其后代元素出发额外的检查和警告<code>只在开发模式中运行，不会与生产模式冲突</code></p>
+<h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ul>
+<li>识别不安全的生命周期组件</li>
+<li>有关旧式字符串ref用法的警告</li>
+<li>有关使用废弃的findDOMNODE方法的警告</li>
+<li>检测意外的副作用</li>
+<li>检测过时的context API</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/23/react-3/" data-id="ckyrcc8ct0000oqn00phn6d8a" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-模拟-3" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -612,70 +674,12 @@
 
 </article>
     
-    <article id="post-模拟-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/">leetcode 1576 替换所有的问号</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" class="article-date">
-  <time datetime="2022-01-05T03:34:05.000Z" itemprop="datePublished">2022-01-05</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="替换所有的问号"><a href="#替换所有的问号" class="headerlink" title="替换所有的问号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/">替换所有的问号</a></h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这种easy题 是要认真读题的，题目只是要求连续的字符不能重复，那我们其实准备三个字符就好</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> modifyString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> tempS = s.split(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tempS.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(tempS[i] === <span class="string">&#x27;?&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span>(cur &lt; <span class="number">3</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[cur] !== tempS[i - <span class="number">1</span>] &amp;&amp; arr[cur] !== tempS[i + <span class="number">1</span>] ) &#123;</span><br><span class="line">                    tempS[i] = arr[cur];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               cur++;</span><br><span class="line">           &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempS.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="提交记录"><a href="#提交记录" class="headerlink" title="提交记录"></a>提交记录</h3><p><img src="/images/leetcode/1576.png" alt="1576"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckyf9whs8000na1n0c1at2nyo" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next</a>
   </nav>
   
 </section>
