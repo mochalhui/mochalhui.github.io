@@ -63,6 +63,132 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-dfs-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/06/dfs-1/">leetcode 200 岛屿数量</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/06/dfs-1/" class="article-date">
+  <time datetime="2022-01-06T03:51:01.000Z" itemprop="datePublished">2022-01-06</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="岛屿数量"><a href="#岛屿数量" class="headerlink" title="岛屿数量"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">岛屿数量</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先想到dfs广度优先搜索，遍历整个二维数组，等出现为1的情况 进入dfs的操作函数<br></p>
+<p>具体操作：</p>
+<ol>
+<li>遇到1 首先把它变成0，防止后续检索到 重复遍历</li>
+<li>检索1的上下左右 如果为1 继续检索 如果是0 return出去</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;character[][]&#125;</span> <span class="variable">grid</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numIslands = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> m = grid.length, n = grid[<span class="number">0</span>].length, res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">i,j</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span>|| i &gt; m - <span class="number">1</span> || j &lt; <span class="number">0</span>|| j &gt; n - <span class="number">1</span> || grid[i][j] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        grid[i][j] = <span class="number">0</span>;</span><br><span class="line">        dfs(i, j + <span class="number">1</span>);</span><br><span class="line">        dfs(i ,j - <span class="number">1</span>);</span><br><span class="line">        dfs(i - <span class="number">1</span>,j);</span><br><span class="line">        dfs(i + <span class="number">1</span>, j)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; m; x++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> y = <span class="number">0</span>; y &lt; n; y++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[x][y] === <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                res ++;</span><br><span class="line">                dfs(x,y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/200.png" alt="200"></p>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/06/dfs-1/" data-id="ckz0zb6r60001xln091vr9spp" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-栈-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/06/%E6%A0%88-2/">leetcode 71 简化路径</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/06/%E6%A0%88-2/" class="article-date">
+  <time datetime="2022-01-06T03:02:56.000Z" itemprop="datePublished">2022-01-06</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="简化路径"><a href="#简化路径" class="headerlink" title="简化路径"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/">简化路径</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>出栈入栈问题，想清楚 什么情况入栈，什么情况出栈</p>
+<ul>
+<li>入栈：真的是目录名称</li>
+<li>出栈：只有..才返回上一级 也就是出栈</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">path</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> simplifyPath = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (path.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> arr = path.split(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> stack = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] === <span class="string">&#x27;.&#x27;</span> || arr[i] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i] === <span class="string">&#x27;..&#x27;</span>) &#123;</span><br><span class="line">            stack.pop()</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            stack.push(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span>+stack.join(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/71.png" alt="844"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/06/%E6%A0%88-2/" data-id="ckz0zb6rn000kxln04g8reth6" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-模拟-1" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -105,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckyf9whs8000na1n0c1at2nyo" class="article-share-link">
+      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckz0zb6rp000nxln08a8z71pc" class="article-share-link">
         Share
       </a>
       
@@ -211,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/04/react-1/" data-id="ckyf9whs7000la1n044kv5t6b" class="article-share-link">
+      <a data-url="http://example.com/2022/01/04/react-1/" data-id="ckz0zb6rb0004xln0cxhh56lr" class="article-share-link">
         Share
       </a>
       
@@ -271,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/03/%E7%9F%A9%E9%98%B5-1/" data-id="ckyf9whsc000va1n04wmu8hi1" class="article-share-link">
+      <a data-url="http://example.com/2022/01/03/%E7%9F%A9%E9%98%B5-1/" data-id="ckz0zb6rt000yxln03le9gdu7" class="article-share-link">
         Share
       </a>
       
@@ -332,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckyf9whrt0004a1n0ez8vf1c3" class="article-share-link">
+      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckz0zb6ri000exln0hc439hxk" class="article-share-link">
         Share
       </a>
       
@@ -386,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" data-id="ckyf9whsd000xa1n02iaugntw" class="article-share-link">
+      <a data-url="http://example.com/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" data-id="ckz0zb6rs000vxln04b1jcet3" class="article-share-link">
         Share
       </a>
       
@@ -447,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" data-id="ckyf9whs9000pa1n0as8h0cp0" class="article-share-link">
+      <a data-url="http://example.com/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" data-id="ckz0zb6rs000uxln03iwhddn2" class="article-share-link">
         Share
       </a>
       
@@ -508,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-2/" data-id="ckyf9whrs0003a1n0hgaycn2b" class="article-share-link">
+      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-2/" data-id="ckz0zb6rh000cxln0bzpja37r" class="article-share-link">
         Share
       </a>
       
@@ -568,125 +694,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/" data-id="ckyf9whrp0001a1n0hmhv2iqz" class="article-share-link">
+      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/" data-id="ckz0zb6rg000axln02frh0dg8" class="article-share-link">
         Share
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-栈-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/27/%E6%A0%88-1/">leetcode 844 比较含退格的字符串</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/12/27/%E6%A0%88-1/" class="article-date">
-  <time datetime="2021-12-27T03:00:42.000Z" itemprop="datePublished">2021-12-27</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/backspace-string-compare/">比较含退格的字符串</a></p>
-<p>思路很简单就是 有#就 pop，不是#就 push 最后比较两个字符串</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">t</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> backspaceCompare = <span class="function"><span class="keyword">function</span> (<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stackS = [],</span><br><span class="line">    stackT = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[i] === <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stackS.length) &#123;</span><br><span class="line">        stackS.pop();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      stackS.push(s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; t.length; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (t[j] === <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stackT.length) &#123;</span><br><span class="line">        stackT.pop();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      stackT.push(t[j]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stackS.join(<span class="string">&quot;&quot;</span>) === stackT.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/844.png" alt="844"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/27/%E6%A0%88-1/" data-id="ckyf9whs6000ja1n0f2kbhtcp" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-贪心-2" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/24/%E8%B4%AA%E5%BF%83-2/">leetcode 1005 K次取反后最大化的数组和</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/12/24/%E8%B4%AA%E5%BF%83-2/" class="article-date">
-  <time datetime="2021-12-24T09:14:03.000Z" itemprop="datePublished">2021-12-24</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/24/%E8%B4%AA%E5%BF%83-2/" data-id="ckyf9whsb000ua1n04wqcghra" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li></ul>
 
     </footer>
 
