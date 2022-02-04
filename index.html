@@ -63,6 +63,94 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-react-4" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/04/react-4/">react-native &amp;&amp; webview &amp;&amp; 端</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/02/04/react-4/" class="article-date">
+  <time datetime="2022-02-04T01:28:21.000Z" itemprop="datePublished">2022-02-04</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>进了新公司一个多月，接触rn也有小半个月了，还没有搞懂这些基本的概念实在是太过分了，这也暴露了我学习知识的一个问题。<br/><br>言归正传，本文将解答我两个疑惑</p>
+<ul>
+<li>rn的本质是什么？</li>
+<li>和webview的区别是什么？</li>
+</ul>
+<h2 id="rn"><a href="#rn" class="headerlink" title="rn"></a>rn</h2><h3 id="rn的特点"><a href="#rn的特点" class="headerlink" title="rn的特点"></a>rn的特点</h3><h4 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h4><p>rn使用了virtual dom（虚拟dom）,只需编写一套代码，便可以将代码打包成不同平台的APP，极大的提高了开发效率，并且相对全部原声开发的应用来说，维护成本相对很低</p>
+<h4 id="原生体验"><a href="#原生体验" class="headerlink" title="原生体验"></a>原生体验</h4><p>rn提供的组件是对原生API的暴露，虽然我们使用的是js语言编写的代码，实际上是调用了原生的API和原生的UI组件。体验和性能足以媲美原生应用（这句话是我抄的 我不信 哦其他的也是抄的 但是信了）</p>
+<h4 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h4><p>因为rn的产物是bundle文件，其实本质上就是js代码，在app启动的时候就会去服务器上获取bundle文件，我们只需要更新bundle文件，从而使得App不需要重新前往商店下载包就可以版本更新，可以用户无感知，但是APPStore禁止热更新的功能中有调用私有API，篡改原生代码，改变APP的行为</p>
+<h3 id="rn原理"><a href="#rn原理" class="headerlink" title="rn原理"></a>rn原理</h3><h4 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h4><p>JavaScriptCore是JavaScript引擎，通常被叫做虚拟机，专门设计来<code>解释和执行</code>JavaScript代码。在React Native里面，JavaScriptCore负责bundle产出的js代码的解析和执行</p>
+<h4 id="js-engine"><a href="#js-engine" class="headerlink" title="js engine"></a>js engine</h4><p>rn需要一个js的运行环境，因为rn会把应用的js代码编译成js文件(bundle)，rn框架的目标就是解释运行这个js的脚本文件，如果是Native拓展的API，则直接通过bridge调用Native方法，最基础的比如绘制UI界面，映射Virtual DOM到真实的UI组件中 (图片来自掘金)</p>
+<p><img src="/images/react/1.jpeg" alt="1"></p>
+
+
+<ul>
+<li>绿色是我们应用开发的部分，写代码的部分</li>
+<li>蓝色代表公用的跨平台的代码和工具引擎，一般不动</li>
+<li>黄色代表平台相关的bridge代码，做定制化的时候会添加修改代码</li>
+<li>红色代表系统平台的功能，另外红色上面有一个许仙，代表平台所有相关东西都通过bridge隔离开了，红色部分是独立于rn的</li>
+</ul>
+<h4 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h4><p>在rn中，原生端和javascript交互是通过bridge进行的，bridge的作用就是給rn内嵌的js engine提供原生接口的扩展供js调用。所有的本地存储、图片资源访问、图形图像绘制、3d加速、网络访问、震动效果、NFC、原生控件绘制、地图、定位、通知等都是通过bridge封装成js接口以后注入js engine供js调用。<br/><br>理论上，任何原生代码能实现的效果都是可以通过bridge封装成js可以调用的组件和方法，以js模块的形式提供给rn使用</p>
+<h2 id="webview"><a href="#webview" class="headerlink" title="webview"></a>webview</h2><h3 id="什么是webview"><a href="#什么是webview" class="headerlink" title="什么是webview"></a>什么是webview</h3><ul>
+<li>webview，直译网页视图，是一个基于webkit（开源浏览器引擎，被用于Safari）内核的，用于显示网页的空间，具备渲染web页面的功能。</li>
+<li>webview可以内嵌在移动端，实现前端的混合式开发，大多数混合式开发框架都是基于WebView模式进行二次开发的，比如uni-app、hybrid app 等<h3 id="webview的特点"><a href="#webview的特点" class="headerlink" title="webview的特点"></a>webview的特点</h3>轻量 app的内容像网页渲染一般轻量<h4 id="一次开发-多系统适配"><a href="#一次开发-多系统适配" class="headerlink" title="一次开发 多系统适配"></a>一次开发 多系统适配</h4>一套代码适应安卓和ios系统<h4 id="web更新为线上即时更新，不需下载补丁包"><a href="#web更新为线上即时更新，不需下载补丁包" class="headerlink" title="web更新为线上即时更新，不需下载补丁包"></a>web更新为线上即时更新，不需下载补丁包</h4>不需要下载补丁包，就可以无痛无感更新</li>
+</ul>
+<h3 id="和rn到底有什么区别如何选择"><a href="#和rn到底有什么区别如何选择" class="headerlink" title="和rn到底有什么区别如何选择"></a>和rn到底有什么区别如何选择</h3><ul>
+<li>rn目前主要的功能提供<code>高效且基础</code>的功能， webview添加一些<code>性能要求不高但动态化要求高的能力</code></li>
+</ul>
+<p><img src="/images/react/2.jpeg" alt="2"></p>
+
+
+<h3 id="webview一些注意点"><a href="#webview一些注意点" class="headerlink" title="webview一些注意点"></a>webview一些注意点</h3><ul>
+<li>在内嵌的webview中应该限制允许打开的webview的域名，并设置进行访问的白名单。或者当用户打开外部链接前給用户强烈而明显的提示</li>
+<li>提供客户端的动态能力，或者提高webview的性能，都是提升app功能覆盖的方式</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/04/react-4/" data-id="ckz84684g00008on00eerbngw" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/" rel="tag">react-native</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-css-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -636,71 +724,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-贪心-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/">leetcode 334 递增的三元子序列</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/" class="article-date">
-  <time datetime="2022-01-12T06:53:33.000Z" itemprop="datePublished">2022-01-12</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="递增的三元子序列"><a href="#递增的三元子序列" class="headerlink" title="递增的三元子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实做到这道题的时候，我还没有完全理解什么是贪心<br><br>但是这道题的思路就是，找到三个递增的，–&gt; 找到两组 两个递增的</p>
-<ul>
-<li>first = nums[0], seoncd = Number.MAX_VALUE</li>
-<li>遍历这个数组 如果当前这个数 已经比second 大了，那么就找到了</li>
-<li>如果比second小 但是比first大，那么新的second出现了</li>
-<li>如果比first小，那么新的first出现了</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> increasingTriplet = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> first = nums[<span class="number">0</span>], second = <span class="built_in">Number</span>.MAX_VALUE, i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = nums[i];</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; second) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; first) &#123;</span><br><span class="line">            second = temp;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            first = temp</span><br><span class="line">        &#125;</span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/334.png" alt="334"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/%E8%B4%AA%E5%BF%83-3/" data-id="ckz0zb6rw0013xln095npamuk" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
 
     </footer>
 
