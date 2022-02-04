@@ -132,7 +132,7 @@
       
 
 <h2 itemprop="name">
-  <a class="article-title" href="/2022/01/23/css-1/">css-1</a>
+  <a class="article-title" href="/2022/01/23/css-1/">工作中遇到的css问题汇总</a>
 </h2>
 
 
@@ -157,7 +157,51 @@
         
       
       
-      
+      <h1 id="距离css-master的一万步"><a href="#距离css-master的一万步" class="headerlink" title="距离css master的一万步"></a>距离css master的一万步</h1><h2 id="less-与-sass-与-stylus"><a href="#less-与-sass-与-stylus" class="headerlink" title="less 与 sass 与 stylus"></a>less 与 sass 与 stylus</h2><ul>
+<li>css预处理器：css预处理器定义了一种新的语言，用一种专门的编程语言，为css增加了一些编程的特性，将css作为目标生成文件，然后开发者就只需要使用这种语言进行css的编码工作</li>
+</ul>
+<h3 id="css-缺点"><a href="#css-缺点" class="headerlink" title="css 缺点"></a>css 缺点</h3><ul>
+<li>css只是标记语言，不可以自定义变量，不可以饮用</li>
+<li>css语法不够强大，不能够嵌套书写，导致模块化开发中需要书写很多重复的选择器</li>
+<li>没有变量和合理的样式复用机制，使得逻辑上相关的属性值必须以字面量的形式重复输出，导致难以维护</li>
+</ul>
+<h3 id="预处理器的优点-amp-amp-缺点"><a href="#预处理器的优点-amp-amp-缺点" class="headerlink" title="预处理器的优点&amp;&amp;缺点"></a>预处理器的优点&amp;&amp;缺点</h3><p>优点：</p>
+<ol>
+<li>提供css层缺失的样式层复用机制</li>
+<li>减少冗余代码</li>
+<li>提高样式代码的可维护性</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>容易造成后代选择器滥用</li>
+</ol>
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><ul>
+<li>less 增加了变量、Mixin、嵌套Nesting、函数等特性，使css更易维护和扩展，可以运行在Node或者client端</li>
+</ul>
+<h4 id="less的变量"><a href="#less的变量" class="headerlink" title="less的变量"></a>less的变量</h4><p>变量允许我们在一个地方定义一系列通用的值，然后在整个样式表中调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//编译前</span><br><span class="line">@width: 10px;</span><br><span class="line">@height: @width + 10px;</span><br><span class="line"></span><br><span class="line">#header &#123;</span><br><span class="line">  width: @width;</span><br><span class="line">  height: @height;</span><br><span class="line">&#125;</span><br><span class="line">//编译后</span><br><span class="line">#header &#123;</span><br><span class="line">  width: 10px;</span><br><span class="line">  height: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="less的Mixin"><a href="#less的Mixin" class="headerlink" title="less的Mixin"></a>less的Mixin</h4><p>Mixin是一种将一组属性从一个规则集包含/混入到另一个规则集的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//定义一个类</span><br><span class="line">.bordered &#123;</span><br><span class="line">  border-top: dotted 1px black;</span><br><span class="line">  border-bottom: solid 2px black;</span><br><span class="line">&#125;</span><br><span class="line">//希望在其他规则集中使用这些属性</span><br><span class="line">#menu a &#123;</span><br><span class="line">  color: #111;</span><br><span class="line">  .bordered();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.post a &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  .bordered();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="less的Nesting"><a href="#less的Nesting" class="headerlink" title="less的Nesting"></a>less的Nesting</h4><p>nesting就是嵌套</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#header &#123;</span><br><span class="line">  color: black;</span><br><span class="line">  .navigation &#123;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">  &#125;</span><br><span class="line">  .logo &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="less-的-operations（运算符）"><a href="#less-的-operations（运算符）" class="headerlink" title="less 的 operations（运算符）"></a>less 的 operations（运算符）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 所有操作数被转换成相同的单位</span><br><span class="line">@conversion-1: 5cm + 10mm; // 结果是 6cm</span><br><span class="line">@conversion-2: 2 - 3cm - 5mm; // 结果是 -1.5cm</span><br><span class="line"></span><br><span class="line">// conversion is impossible</span><br><span class="line">@incompatible-units: 2 + 5px - 3cm; // 结果是 4px</span><br><span class="line"></span><br><span class="line">// example with variables</span><br><span class="line">@base: 5%;</span><br><span class="line">@filler: @base * 2; // 结果是 10%</span><br><span class="line">@other: @base + @filler; // 结果是 15%</span><br><span class="line"></span><br><span class="line">@color: #224488 / 2; //结果是 #112244</span><br><span class="line">background-color: #112244 + #111; // 结果是 #223355</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="less的Functions"><a href="#less的Functions" class="headerlink" title="less的Functions"></a>less的Functions</h4><p>Less内置了多种函数用于转换颜色、处理字符串、运算等等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@base: #f04615;</span><br><span class="line">@width: 0.5;</span><br><span class="line"></span><br><span class="line">.class &#123;</span><br><span class="line">  width: percentage(@width); // returns `50%`</span><br><span class="line">  color: saturate(@base, 5%);</span><br><span class="line">  background-color: spin(lighten(@base, 25%), 8);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="less的Importing"><a href="#less的Importing" class="headerlink" title="less的Importing"></a>less的Importing</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;library&quot;; // library.less</span><br><span class="line">@import &quot;typo.css&quot;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h3><p>sass在css语法的基础上增加了变量(variables)，嵌套(nested rules)，混合(mixins)，导入(inline imports)等高级功能</p>
+<h4 id="sass-的-变量"><a href="#sass-的-变量" class="headerlink" title="sass 的 变量"></a>sass 的 变量</h4><p>sass用$来表示变量（老版本用！）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$highlight-color: #F90;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sass的嵌套"><a href="#sass的嵌套" class="headerlink" title="sass的嵌套"></a>sass的嵌套</h4><p>子组合选择器和同层组合选择器&gt; + 和~</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">article &#123;</span><br><span class="line">  ~ article &#123; border-top: 1px dashed #ccc &#125;</span><br><span class="line">  &gt; section &#123; background: #eee &#125;</span><br><span class="line">  dl &gt; &#123;</span><br><span class="line">    dt &#123; color: #333 &#125;</span><br><span class="line">    dd &#123; color: #555 &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  nav + &amp; &#123; margin-top: 0 &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="sass的混合器Minxin"><a href="#sass的混合器Minxin" class="headerlink" title="sass的混合器Minxin"></a>sass的混合器Minxin</h4><p>使用@mixin定义，可以重用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@mixin rounded-corners &#123;</span><br><span class="line">  -moz-border-radius: 5px;</span><br><span class="line">  -webkit-border-radius: 5px;</span><br><span class="line">  border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line">//在其他区域想要复用</span><br><span class="line"></span><br><span class="line">notice &#123;</span><br><span class="line">  background-color: green;</span><br><span class="line">  border: 2px solid #00aa00;</span><br><span class="line">  @include rounded-corners;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h3><p>富于表现力 动态的 健壮的 css，来自nodejs社区<br><br/><br>这里不举例子，在我第一次开始实习 就见识到了stylus 我那时候还惊叹于 他们css是不是写错了 为什么没有花括号，对我个人使用而言,我确实更喜欢stylus，非常自由</p>
+
       
     </div>
     <footer class="article-footer">
@@ -165,6 +209,8 @@
         Share
       </a>
       
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+
     </footer>
 
   </div>
