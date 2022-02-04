@@ -63,6 +63,71 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-css-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/04/css-2/">viewport和1px</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/02/04/css-2/" class="article-date">
+  <time datetime="2022-02-04T01:07:12.000Z" itemprop="datePublished">2022-02-04</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="viewport和1px"><a href="#viewport和1px" class="headerlink" title="viewport和1px"></a>viewport和1px</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>高清屏中——移动端的1px很粗，无论是h5还是rn,都需要重新进行适配</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
+<li>DPR(devicePIxelRatio)设备像素比，它是默认缩放为100%的情况下，设备像素和css像素的比值。简单的说，这应该告诉浏览器应该使用多少个屏幕的实际像素来绘制单个css像素</li>
+<li>用户缩放。用户把页面放大一倍，css中1px所代表的物理像素也会增加一倍。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = <span class="built_in">window</span>.devicePixelRatio;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>如果1px是2px，那么0.5px不就是1px？？<br/><br>事实不一定，Retina屏浏览器很有可能不认识0.5px的边框，会变成0px （ios 7 及以前版本，安卓设备表现）<br/><br>我们可以通过检测浏览器能不能处理0.5px，如果处理不了，就给<html>元素加一个class</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if (window.devicePixelRatio &amp;&amp; devicePixelRatio &gt;= 2) &#123;</span><br><span class="line">  var testElem = document.createElement(&#x27;div&#x27;);</span><br><span class="line">  testElem.style.border = &#x27;.5px solid transparent&#x27;;</span><br><span class="line">  document.body.appendChild(testElem);</span><br><span class="line">  if (testElem.offsetHeight == 1)</span><br><span class="line">  &#123;</span><br><span class="line">    document.querySelector(&#x27;html&#x27;).classList.add(&#x27;hairlines&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">  document.body.removeChild(testElem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  border: 1px solid #bbb;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.hairlines div &#123;</span><br><span class="line">  border-width: 0.5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/04/css-2/" data-id="ckz7q9nj60000wqn0ds3b5kh6" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-hashmap-1" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -636,65 +701,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-栈-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/08/%E6%A0%88-3/">leetcode 1614 括号的最大嵌套深度</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/08/%E6%A0%88-3/" class="article-date">
-  <time datetime="2022-01-08T03:13:58.000Z" itemprop="datePublished">2022-01-08</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="括号的最大嵌套深度"><a href="#括号的最大嵌套深度" class="headerlink" title="括号的最大嵌套深度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-nesting-depth-of-the-parentheses/">括号的最大嵌套深度</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>可以用栈来做，但这道题，其实用两个字符串就可以很好的解决这个问题</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span>, tempRes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            res ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">            res --;</span><br><span class="line">        &#125;</span><br><span class="line">       tempRes = <span class="built_in">Math</span>.max(tempRes, res)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempRes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1614.png" alt="1614"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/08/%E6%A0%88-3/" data-id="ckz0zb6ro000lxln0h3mpa314" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
 
     </footer>
 
