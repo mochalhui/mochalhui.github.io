@@ -63,6 +63,126 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-react-5" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/22/react-5/">react rerender</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/22/react-5/" class="article-date">
+  <time datetime="2022-04-22T08:03:46.000Z" itemprop="datePublished">2022-04-22</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="react-rerender"><a href="#react-rerender" class="headerlink" title="react rerender"></a>react rerender</h2><p>3 reasons caused re-rendering </p>
+<h3 id="Update-in-State"><a href="#Update-in-State" class="headerlink" title="Update in State"></a>Update in State</h3><ul>
+<li>prop<br>prop changed -&gt; state changed</li>
+<li>setState</li>
+</ul>
+<h3 id="Update-in-Prop"><a href="#Update-in-Prop" class="headerlink" title="Update in Prop"></a>Update in Prop</h3><p>prop changes -&gt; setState changes</p>
+<h3 id="Re-rendering-of-parent-Component"><a href="#Re-rendering-of-parent-Component" class="headerlink" title="Re-rendering of parent Component"></a>Re-rendering of parent Component</h3><p>when re-rendering function is called in the parent component, all the subsequent component will rerender, regardless of whether their props are changed or not</p>
+<h2 id="render-is-not-immediately"><a href="#render-is-not-immediately" class="headerlink" title="render is not immediately"></a>render is not immediately</h2><p>React schedule the render, but that is not immediately (sync)</p>
+<h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><ul>
+<li><p>You can use the React.memo (hook) for performance optimization</p>
+</li>
+<li><p>React.memo will memorize the latest version, only the props changed, the re-rendering will be called</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/22/react-5/" data-id="cl2bjrr3p0000o6n07lelgwpr" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-网络-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/26/%E7%BD%91%E7%BB%9C-1/">网络-1</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/02/26/%E7%BD%91%E7%BB%9C-1/" class="article-date">
+  <time datetime="2022-02-26T15:02:48.000Z" itemprop="datePublished">2022-02-26</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/26/%E7%BD%91%E7%BB%9C-1/" data-id="cl2bjrr3t0001o6n0cdg37ui5" class="article-share-link">
+        Share
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-react-4" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -603,130 +723,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-react-2" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/13/react-2/">react-native 骨架屏组件封装</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/13/react-2/" class="article-date">
-  <time datetime="2022-01-13T06:51:51.000Z" itemprop="datePublished">2022-01-13</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近接到了一个新需求，需要给rn的页面加两个骨架屏的loading，提高用户体验</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
-<li>封装成一个组件，方便调用</li>
-<li>暴露一些属性给用户</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>使用方式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Rect list=&#123;dataList&#125; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dataList = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">width</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">100</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<code>dataList</code>是一个数组，可以传入每一个模块的比如宽/高参数</li>
-</ul>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><ul>
-<li>添加动画效果的选项</li>
-<li>封装成一个整体，push到git上，可供依赖下载</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/13/react-2/" data-id="ckz0zb6rc0005xln04baeh8rf" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/" rel="tag">react-native</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-ts-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/12/ts-1/">ts 体操</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/12/ts-1/" class="article-date">
-  <time datetime="2022-01-12T10:29:48.000Z" itemprop="datePublished">2022-01-12</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="2-获取函数返回类型"><a href="#2-获取函数返回类型" class="headerlink" title="2 - 获取函数返回类型"></a>2 - 获取函数返回类型</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>利用infer的类型推导，构造出函数和他的返回值</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyReturnType&lt;T&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; infer P ? P : <span class="built_in">never</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-实现Omit"><a href="#3-实现Omit" class="headerlink" title="3 - 实现Omit"></a>3 - 实现Omit</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>利用Exclude</p>
-<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyOmit&lt;T, K&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> Exclude&lt;keyof T, K&gt;] = T[P]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/ts-1/" data-id="ckz0zb6re0009xln0hxoj5mdo" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
 
     </footer>
 
