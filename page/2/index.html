@@ -63,6 +63,64 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-模拟-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/13/%E6%A8%A1%E6%8B%9F-2/">leetcode 747 至少是其他数字两倍的最大数</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/13/%E6%A8%A1%E6%8B%9F-2/" class="article-date">
+  <time datetime="2022-01-13T15:03:18.000Z" itemprop="datePublished">2022-01-13</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="至少是其他数字两倍的最大数"><a href="#至少是其他数字两倍的最大数" class="headerlink" title="至少是其他数字两倍的最大数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/">至少是其他数字两倍的最大数</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实思路有很多，我选择了最懒惰的一种，Math.floor(max / 2)去做比较，</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> dominantIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> max = <span class="built_in">Math</span>.max(...nums),tempNum = <span class="built_in">Math</span>.floor(max / <span class="number">2</span>), i = <span class="number">0</span>,index = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">if</span>(max === nums[i]) &#123;</span><br><span class="line">            index = i</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tempNum &lt; nums[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/leetcode/747.png" alt="747"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/13/%E6%A8%A1%E6%8B%9F-2/" data-id="ckz0zb6rq000pxln0a93748lp" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-react-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -650,67 +708,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag">矩阵</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-回溯-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/31/%E5%9B%9E%E6%BA%AF-1/">leetcode 17 电话号码的组合</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" class="article-date">
-  <time datetime="2021-12-31T04:01:35.000Z" itemprop="datePublished">2021-12-31</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">电话号码的组合</a></p>
-<p>思路其实非常清晰： 由于题目要求四位 可以直接while+ma<br></p>
-<p>中间卡在了数组扁平化，可以直接用es6的新方法，flat</p>
-<p><code>arr.flat(length)</code><br>不会改变原数组,返回值是改变后的数组，如果知道深度，可以直接填，不知道可以Infinity</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">digits</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> letterCombinations = <span class="function"><span class="keyword">function</span>(<span class="params">digits</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> digitsObj = &#123;</span><br><span class="line">        <span class="number">1</span>:[],</span><br><span class="line">        <span class="number">2</span>: [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>],</span><br><span class="line">        <span class="number">3</span>: [<span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>],</span><br><span class="line">        <span class="number">4</span>: [<span class="string">&quot;g&quot;</span>,<span class="string">&quot;h&quot;</span>,<span class="string">&quot;i&quot;</span>],</span><br><span class="line">        <span class="number">5</span>: [<span class="string">&quot;j&quot;</span>,<span class="string">&quot;k&quot;</span>,<span class="string">&quot;l&quot;</span>],</span><br><span class="line">        <span class="number">6</span>: [<span class="string">&quot;m&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;o&quot;</span>],</span><br><span class="line">        <span class="number">7</span>: [<span class="string">&quot;p&quot;</span>,<span class="string">&quot;q&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;s&quot;</span>],</span><br><span class="line">        <span class="number">8</span>: [<span class="string">&quot;t&quot;</span>, <span class="string">&quot;u&quot;</span>,<span class="string">&quot;v&quot;</span>],</span><br><span class="line">        <span class="number">9</span>: [<span class="string">&quot;w&quot;</span>,<span class="string">&quot;x&quot;</span>,<span class="string">&quot;y&quot;</span>,<span class="string">&quot;z&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!digits) &#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(digits.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> digitsObj[digits[<span class="number">0</span>]]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> cur = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> len = digits.length;</span><br><span class="line">    <span class="keyword">let</span> res = digitsObj[digits[<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">while</span>(cur &lt; len) &#123;</span><br><span class="line">        res = res.map(<span class="function"><span class="params">item</span> =&gt;</span>  digitsObj[digits[cur]].map(<span class="function"><span class="params">dig</span> =&gt;</span> item + dig))</span><br><span class="line">        cur++;</span><br><span class="line">        res = res.flat()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res.flat(len - <span class="number">1</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片✅<br><img src="/images/leetcode/17.png" alt="17"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckz0zb6ri000exln0hc439hxk" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li></ul>
 
     </footer>
 
