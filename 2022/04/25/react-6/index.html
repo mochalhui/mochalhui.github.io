@@ -59,13 +59,34 @@
 
     
     
+<div class="tocbot"></div>
+
     
 
     <div class="article-entry" itemprop="articleBody">
       
       
       
-      
+      <h2 id="react-runtime-environment"><a href="#react-runtime-environment" class="headerlink" title="react runtime environment"></a>react runtime environment</h2><p><img src="/images/react/react-runtime-environment.png" alt="react-runtime-environment"></p>
+
+<h3 id="requestHostCallback"><a href="#requestHostCallback" class="headerlink" title="requestHostCallback"></a>requestHostCallback</h3><h4 id="reqestIdCallback"><a href="#reqestIdCallback" class="headerlink" title="reqestIdCallback"></a>reqestIdCallback</h4><ul>
+<li><code>requestIdCallback</code> relys on <code>requestAnimationFrame</code>, <code>requestAnimationFrame</code> gussing the next vsync </li>
+</ul>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><ul>
+<li><code>Promise</code> is the microtasks ! The microtasks are continuously executed unitl the microtasks queue on the event loop is empty, which may be blocked by React if has the high-pri interaction.</li>
+</ul>
+<h4 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h4><ul>
+<li>the <code>4ms</code> clamping cannot be accepted</li>
+</ul>
+<h4 id="Message-Channel"><a href="#Message-Channel" class="headerlink" title="Message Channel"></a>Message Channel</h4><ul>
+<li>may intensify competition for other tasks in the brower ❓</li>
+<li>Message Channel posts a message and performs a small amount of work <code>5ms</code> ,regardless of where it might be in the vsync cycle (not rely on the vsync cycle)</li>
+<li>at the end of event, if there’s work left over, post anonther message evnet</li>
+</ul>
+<h3 id="Distinguish-between-node-IE-and-jsdom"><a href="#Distinguish-between-node-IE-and-jsdom" class="headerlink" title="Distinguish between (node , IE) and jsdom"></a>Distinguish between (node , IE) and jsdom</h3><ul>
+<li>Since node.js 15，there is a gloabl <code>MessageChannel</code>object, which prevents node event loop from exiting</li>
+</ul>
+<h3 id="Use-setImmediate-in-Node-js-amp-IE"><a href="#Use-setImmediate-in-Node-js-amp-IE" class="headerlink" title="Use setImmediate in Node js &amp; IE"></a>Use setImmediate in Node js &amp; IE</h3>
       
     </div>
     <footer class="article-footer">
