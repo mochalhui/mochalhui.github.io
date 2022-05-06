@@ -8,7 +8,7 @@
   
   
   <title>
-    react scheduler |
+    react context |
     
     Hexo
   </title>
@@ -31,7 +31,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-react-6" class="article article-type-post" itemscope
+  <article id="post-react-7" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  react scheduler
+  react context
 </h1>
 
 
@@ -50,8 +50,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/04/25/react-6/" class="article-date">
-  <time datetime="2022-04-25T06:31:07.000Z" itemprop="datePublished">2022-04-25</time>
+      <a href="/2022/05/06/react-7/" class="article-date">
+  <time datetime="2022-05-06T06:42:43.000Z" itemprop="datePublished">2022-05-06</time>
 </a>
       
     </div>
@@ -67,30 +67,40 @@
       
       
       
-      <h2 id="react-runtime-environment"><a href="#react-runtime-environment" class="headerlink" title="react runtime environment"></a>react runtime environment</h2><p><img src="/images/react/react-runtime-environment.png" alt="react-runtime-environment"></p>
+      <p><img src="/images/react/react-context.png" alt="react-context"></p>
 
-<h3 id="requestHostCallback"><a href="#requestHostCallback" class="headerlink" title="requestHostCallback"></a>requestHostCallback</h3><h4 id="reqestIdCallback"><a href="#reqestIdCallback" class="headerlink" title="reqestIdCallback"></a>reqestIdCallback</h4><ul>
-<li><code>requestIdCallback</code> relys on <code>requestAnimationFrame</code>, <code>requestAnimationFrame</code> gussing the next vsync </li>
+
+<h2 id="context-is-broadcast"><a href="#context-is-broadcast" class="headerlink" title="context is broadcast"></a>context is broadcast</h2><ul>
+<li>useEffect needs props pass through level by level</li>
+<li>context can pass in different nesting level (‘global’)</li>
 </ul>
-<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><ul>
-<li><code>Promise</code> is the microtasks ! The microtasks are continuously executed unitl the microtasks queue on the event loop is empty, which may be blocked by React if has the high-pri interaction.</li>
+<h2 id="createContext-class-useContext-hook"><a href="#createContext-class-useContext-hook" class="headerlink" title="createContext(class) / useContext (hook)"></a>createContext(class) / useContext (hook)</h2><blockquote>
+<p>defaultValue: ONLY used when component doesn’t match any provider</p>
+</blockquote>
+<ul>
+<li>if passed <code>undefined</code>, not cause use <code>defaultValue</code></li>
 </ul>
-<h4 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h4><ul>
-<li>the <code>4ms</code> clamping cannot be accepted</li>
+<h2 id="Provider-provide-the-context-value"><a href="#Provider-provide-the-context-value" class="headerlink" title="Provider: provide the context value"></a>Provider: provide the context value</h2><p><code>&lt;MyContext.Provider value=&#123;aaa&#125;&gt;</code></p>
+<ul>
+<li><p>All consumers that are descendants of the Provider will re-render whenever the Provider’s value changes</p>
+</li>
+<li><p>the propagation from Provider to its descendant consumers is not subject to the <code>shouldComponentUpdate</code> method</p>
+</li>
+<li><p>the consumer is updated even when an ancestor component skips an update</p>
+</li>
+<li><p>use <code>Object.is</code> compare new and old</p>
+</li>
 </ul>
-<h4 id="Message-Channel"><a href="#Message-Channel" class="headerlink" title="Message Channel"></a>Message Channel</h4><ul>
-<li>may intensify competition for other tasks in the brower ❓</li>
-<li>Message Channel posts a message and performs a small amount of work <code>5ms</code> ,regardless of where it might be in the vsync cycle (not rely on the vsync cycle)</li>
-<li>at the end of event, if there’s work left over, post anonther message evnet</li>
+<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h2><ul>
+<li>requeire a function as child</li>
+<li>return a React Node</li>
+<li>if there is no Provider, use <code>defaultValue</code></li>
 </ul>
-<h3 id="Distinguish-between-node-IE-and-jsdom"><a href="#Distinguish-between-node-IE-and-jsdom" class="headerlink" title="Distinguish between (node , IE) and jsdom"></a>Distinguish between (node , IE) and jsdom</h3><ul>
-<li>Since node.js 15，there is a gloabl <code>MessageChannel</code>object, which prevents node event loop from exiting</li>
-</ul>
-<h3 id="Use-setImmediate-in-Node-js-amp-IE"><a href="#Use-setImmediate-in-Node-js-amp-IE" class="headerlink" title="Use setImmediate in Node js &amp; IE"></a>Use setImmediate in Node js &amp; IE</h3>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/25/react-6/" data-id="cl2ecijgf0000udn0fm5tev7a" class="article-share-link">
+      <a data-url="http://example.com/2022/05/06/react-7/" data-id="cl2u7lhhf000065n02ec66vdf" class="article-share-link">
         Share
       </a>
       
@@ -104,19 +114,10 @@
   
 <nav class="article-nav">
   
-  <a href="/2022/05/06/react-7/" class="article-nav-link">
-    <strong class="article-nav-caption">Newer</strong>
-    <div class="article-nav-title">
-      
-      react context
-      
-    </div>
-  </a>
   
-  
-  <a href="/2022/04/22/react-5/" class="article-nav-link">
+  <a href="/2022/04/25/react-6/" class="article-nav-link">
     <strong class="article-nav-caption">Older</strong>
-    <div class="article-nav-title">react rerender</div>
+    <div class="article-nav-title">react scheduler</div>
   </a>
   
 </nav>

@@ -63,6 +63,89 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-react-7" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/05/06/react-7/">react context</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/06/react-7/" class="article-date">
+  <time datetime="2022-05-06T06:42:43.000Z" itemprop="datePublished">2022-05-06</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><img src="/images/react/react-context.png" alt="react-context"></p>
+
+
+<h2 id="context-is-broadcast"><a href="#context-is-broadcast" class="headerlink" title="context is broadcast"></a>context is broadcast</h2><ul>
+<li>useEffect needs props pass through level by level</li>
+<li>context can pass in different nesting level (‘global’)</li>
+</ul>
+<h2 id="createContext-class-useContext-hook"><a href="#createContext-class-useContext-hook" class="headerlink" title="createContext(class) / useContext (hook)"></a>createContext(class) / useContext (hook)</h2><blockquote>
+<p>defaultValue: ONLY used when component doesn’t match any provider</p>
+</blockquote>
+<ul>
+<li>if passed <code>undefined</code>, not cause use <code>defaultValue</code></li>
+</ul>
+<h2 id="Provider-provide-the-context-value"><a href="#Provider-provide-the-context-value" class="headerlink" title="Provider: provide the context value"></a>Provider: provide the context value</h2><p><code>&lt;MyContext.Provider value=&#123;aaa&#125;&gt;</code></p>
+<ul>
+<li><p>All consumers that are descendants of the Provider will re-render whenever the Provider’s value changes</p>
+</li>
+<li><p>the propagation from Provider to its descendant consumers is not subject to the <code>shouldComponentUpdate</code> method</p>
+</li>
+<li><p>the consumer is updated even when an ancestor component skips an update</p>
+</li>
+<li><p>use <code>Object.is</code> compare new and old</p>
+</li>
+</ul>
+<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h2><ul>
+<li>requeire a function as child</li>
+<li>return a React Node</li>
+<li>if there is no Provider, use <code>defaultValue</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/06/react-7/" data-id="cl2u7lhhf000065n02ec66vdf" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-react-6" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -679,65 +762,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-堆-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/14/%E5%A0%86-1/">leetcode 373 查找和最小的 K 对数字</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/14/%E5%A0%86-1/" class="article-date">
-  <time datetime="2022-01-14T05:52:01.000Z" itemprop="datePublished">2022-01-14</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="查找和最小的-K-对数字"><a href="#查找和最小的-K-对数字" class="headerlink" title="查找和最小的 K 对数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/">查找和最小的 K 对数字</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>说实话 不看tag 我根本不知道这是一道堆的题<br>我的方法不是很优，但是也没有那么暴力，如果以后有机会的话优化下吧</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> kSmallestPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [], maxSum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nums2.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(res.length &lt; k) &#123;</span><br><span class="line">                res.push([nums1[i],nums2[j]])</span><br><span class="line">                maxSum = <span class="built_in">Math</span>.max(maxSum, nums2[j] + nums1[i])</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(maxSum &gt; nums1[i]+ nums2[j])&#123;</span><br><span class="line">                    res.push([nums1[i],nums2[j]])</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> (a[<span class="number">0</span>] + a[<span class="number">1</span>]) - (b[<span class="number">0</span>] + b[<span class="number">1</span>])).slice(<span class="number">0</span>,k)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/373.png" alt="373"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/14/%E5%A0%86-1/" data-id="ckz0zb6rl000gxln012myg2ze" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li></ul>
 
     </footer>
 
