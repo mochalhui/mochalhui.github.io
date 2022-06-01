@@ -63,6 +63,74 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-ts-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/05/30/ts-2/">typescript 盲区汇总</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/30/ts-2/" class="article-date">
+  <time datetime="2022-05-30T15:15:49.000Z" itemprop="datePublished">2022-05-30</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="in-operator-narrow-type"><a href="#in-operator-narrow-type" class="headerlink" title="in operator: narrow type"></a><code>in</code> operator: narrow type</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">logPerson</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> additionalInformation: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&#x27;role&#x27;</span> <span class="keyword">in</span> person) &#123;</span><br><span class="line">        additionalInformation = person.role;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        additionalInformation = person.occupation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">` - <span class="subst">$&#123;person.name&#125;</span>, <span class="subst">$&#123;person.age&#125;</span>, <span class="subst">$&#123;additionalInformation&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&#39;role&#39; in person</code> (return true)will let the type narrow to the type who has an optional or requried property <code>role</code></li>
+<li>but return false will let the type narrow to the type who has a optional or missing property <code>role</code></li>
+</ul>
+<h2 id="is-operator-specify-type"><a href="#is-operator-specify-type" class="headerlink" title="is operator: specify type"></a><code>is</code> operator: specify type</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isAdmin</span>(<span class="params">person: Person</span>): <span class="title">person</span> <span class="title">is</span> <span class="title">Admin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> person.type === <span class="string">&#x27;admin&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>you can use the <code>is</code> specify the return value types</li>
+</ul>
+<h2 id="function-overloads-functions-can-be-called-in-different-ways"><a href="#function-overloads-functions-can-be-called-in-different-ways" class="headerlink" title="function overloads: functions can be called in different ways"></a>function overloads: functions can be called in different ways</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// type Person = User | Admin</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;user&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">User</span>[]</span></span><br><span class="line"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;admin&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">Admin</span>[]  </span></span></span><br><span class="line"><span class="function"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">persons: Person[], personType: <span class="built_in">string</span>, criteria: Partial&lt;Person&gt;</span>): <span class="title">Person</span>[] </span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="function">    <span class="title">return</span> <span class="title">persons</span></span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; person.<span class="keyword">type</span> === personType</span>)</span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">let</span> criteriaKeys = <span class="built_in">Object</span>.keys(criteria) <span class="keyword">as</span> (keyof Person)[];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">return</span> criteriaKeys.every((fieldName) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">                <span class="keyword">return</span> person[fieldName] === criteria[fieldName];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            &#125;);</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">        &#125;</span>)</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Always prefer parameters with union types instead of overloads when possible</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/30/ts-2/" data-id="cl3svj5iy0000hdn0blvgaugu" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-react-7" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -704,64 +772,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-模拟-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/">leetcode 1716 计算力扣银行的钱</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" class="article-date">
-  <time datetime="2022-01-15T03:26:44.000Z" itemprop="datePublished">2022-01-15</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="计算力扣银行的钱"><a href="#计算力扣银行的钱" class="headerlink" title="计算力扣银行的钱"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/calculate-money-in-leetcode-bank/">计算力扣银行的钱</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我恨数学！！！！</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> totalMoney = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = <span class="built_in">Math</span>.floor(n / <span class="number">7</span>), y = n % <span class="number">7</span></span><br><span class="line">    <span class="keyword">return</span> x * (x + <span class="number">7</span>) * <span class="number">7</span> / <span class="number">2</span> + (y + <span class="number">1</span>) * y / <span class="number">2</span> + x * y</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1716.png" alt="1716"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" data-id="ckz0zb6rr000sxln07a3557pv" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
 
     </footer>
 

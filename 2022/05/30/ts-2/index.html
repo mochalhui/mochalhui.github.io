@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    typescript 盲区汇总 |
+    
+    Hexo
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-ts-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  typescript 盲区汇总
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/30/ts-2/" class="article-date">
+  <time datetime="2022-05-30T15:15:49.000Z" itemprop="datePublished">2022-05-30</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <h2 id="in-operator-narrow-type"><a href="#in-operator-narrow-type" class="headerlink" title="in operator: narrow type"></a><code>in</code> operator: narrow type</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">logPerson</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> additionalInformation: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&#x27;role&#x27;</span> <span class="keyword">in</span> person) &#123;</span><br><span class="line">        additionalInformation = person.role;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        additionalInformation = person.occupation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">` - <span class="subst">$&#123;person.name&#125;</span>, <span class="subst">$&#123;person.age&#125;</span>, <span class="subst">$&#123;additionalInformation&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&#39;role&#39; in person</code> (return true)will let the type narrow to the type who has an optional or requried property <code>role</code></li>
+<li>but return false will let the type narrow to the type who has a optional or missing property <code>role</code></li>
+</ul>
+<h2 id="is-operator-specify-type"><a href="#is-operator-specify-type" class="headerlink" title="is operator: specify type"></a><code>is</code> operator: specify type</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isAdmin</span>(<span class="params">person: Person</span>): <span class="title">person</span> <span class="title">is</span> <span class="title">Admin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> person.type === <span class="string">&#x27;admin&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>you can use the <code>is</code> specify the return value types</li>
+</ul>
+<h2 id="function-overloads-functions-can-be-called-in-different-ways"><a href="#function-overloads-functions-can-be-called-in-different-ways" class="headerlink" title="function overloads: functions can be called in different ways"></a>function overloads: functions can be called in different ways</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// type Person = User | Admin</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;user&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">User</span>[]</span></span><br><span class="line"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;admin&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">Admin</span>[]  </span></span></span><br><span class="line"><span class="function"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">persons: Person[], personType: <span class="built_in">string</span>, criteria: Partial&lt;Person&gt;</span>): <span class="title">Person</span>[] </span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="function">    <span class="title">return</span> <span class="title">persons</span></span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; person.<span class="keyword">type</span> === personType</span>)</span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">let</span> criteriaKeys = <span class="built_in">Object</span>.keys(criteria) <span class="keyword">as</span> (keyof Person)[];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">return</span> criteriaKeys.every((fieldName) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">                <span class="keyword">return</span> person[fieldName] === criteria[fieldName];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            &#125;);</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">        &#125;</span>)</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Always prefer parameters with union types instead of overloads when possible</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/30/ts-2/" data-id="cl3svj5iy0000hdn0blvgaugu" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/05/06/react-7/" class="article-nav-link">
+    <strong class="article-nav-caption">Older</strong>
+    <div class="article-nav-title">react context</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Hexo &copy; 2022</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Hexo"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
