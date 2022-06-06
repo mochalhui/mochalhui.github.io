@@ -63,7 +63,7 @@
     <h1 class="page-type-title"></h1>
     
     
-    <article id="post-模拟-3" class="article article-type-post" itemscope
+    <article id="post-react-1" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -72,7 +72,7 @@
       
 
 <h2 itemprop="name">
-  <a class="article-title" href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/">leetcode 1716 计算力扣银行的钱</a>
+  <a class="article-title" href="/2022/01/04/react-1/">hook_useCallback</a>
 </h2>
 
 
@@ -82,8 +82,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" class="article-date">
-  <time datetime="2022-01-15T03:26:44.000Z" itemprop="datePublished">2022-01-15</time>
+      <a href="/2022/01/04/react-1/" class="article-date">
+  <time datetime="2022-01-04T08:18:43.000Z" itemprop="datePublished">2022-01-04</time>
 </a>
       
     </div>
@@ -97,448 +97,67 @@
         
       
       
-      <h2 id="计算力扣银行的钱"><a href="#计算力扣银行的钱" class="headerlink" title="计算力扣银行的钱"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/calculate-money-in-leetcode-bank/">计算力扣银行的钱</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我恨数学！！！！</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> totalMoney = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = <span class="built_in">Math</span>.floor(n / <span class="number">7</span>), y = n % <span class="number">7</span></span><br><span class="line">    <span class="keyword">return</span> x * (x + <span class="number">7</span>) * <span class="number">7</span> / <span class="number">2</span> + (y + <span class="number">1</span>) * y / <span class="number">2</span> + x * y</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1716.png" alt="1716"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" data-id="ckz0zb6rr000sxln07a3557pv" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-堆-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/14/%E5%A0%86-1/">leetcode 373 查找和最小的 K 对数字</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/14/%E5%A0%86-1/" class="article-date">
-  <time datetime="2022-01-14T05:52:01.000Z" itemprop="datePublished">2022-01-14</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="查找和最小的-K-对数字"><a href="#查找和最小的-K-对数字" class="headerlink" title="查找和最小的 K 对数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/">查找和最小的 K 对数字</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>说实话 不看tag 我根本不知道这是一道堆的题<br>我的方法不是很优，但是也没有那么暴力，如果以后有机会的话优化下吧</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> kSmallestPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [], maxSum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nums2.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(res.length &lt; k) &#123;</span><br><span class="line">                res.push([nums1[i],nums2[j]])</span><br><span class="line">                maxSum = <span class="built_in">Math</span>.max(maxSum, nums2[j] + nums1[i])</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(maxSum &gt; nums1[i]+ nums2[j])&#123;</span><br><span class="line">                    res.push([nums1[i],nums2[j]])</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> (a[<span class="number">0</span>] + a[<span class="number">1</span>]) - (b[<span class="number">0</span>] + b[<span class="number">1</span>])).slice(<span class="number">0</span>,k)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/373.png" alt="373"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/14/%E5%A0%86-1/" data-id="ckz0zb6rl000gxln012myg2ze" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-模拟-2" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/13/%E6%A8%A1%E6%8B%9F-2/">leetcode 747 至少是其他数字两倍的最大数</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/13/%E6%A8%A1%E6%8B%9F-2/" class="article-date">
-  <time datetime="2022-01-13T15:03:18.000Z" itemprop="datePublished">2022-01-13</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="至少是其他数字两倍的最大数"><a href="#至少是其他数字两倍的最大数" class="headerlink" title="至少是其他数字两倍的最大数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/">至少是其他数字两倍的最大数</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实思路有很多，我选择了最懒惰的一种，Math.floor(max / 2)去做比较，</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> dominantIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> max = <span class="built_in">Math</span>.max(...nums),tempNum = <span class="built_in">Math</span>.floor(max / <span class="number">2</span>), i = <span class="number">0</span>,index = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">if</span>(max === nums[i]) &#123;</span><br><span class="line">            index = i</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tempNum &lt; nums[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/leetcode/747.png" alt="747"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/13/%E6%A8%A1%E6%8B%9F-2/" data-id="ckz0zb6rq000pxln0a93748lp" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-react-2" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/13/react-2/">react-native 骨架屏组件封装</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/13/react-2/" class="article-date">
-  <time datetime="2022-01-13T06:51:51.000Z" itemprop="datePublished">2022-01-13</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近接到了一个新需求，需要给rn的页面加两个骨架屏的loading，提高用户体验</p>
-<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
-<li>封装成一个组件，方便调用</li>
-<li>暴露一些属性给用户</li>
-</ol>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>使用方式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Rect list=&#123;dataList&#125; /&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dataList = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">width</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="number">100</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<code>dataList</code>是一个数组，可以传入每一个模块的比如宽/高参数</li>
-</ul>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><ul>
-<li>添加动画效果的选项</li>
-<li>封装成一个整体，push到git上，可供依赖下载</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/13/react-2/" data-id="ckz0zb6rc0005xln04baeh8rf" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/" rel="tag">react-native</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-ts-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/12/ts-1/">ts 体操</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/12/ts-1/" class="article-date">
-  <time datetime="2022-01-12T10:29:48.000Z" itemprop="datePublished">2022-01-12</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="2-获取函数返回类型"><a href="#2-获取函数返回类型" class="headerlink" title="2 - 获取函数返回类型"></a>2 - 获取函数返回类型</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>利用infer的类型推导，构造出函数和他的返回值</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyReturnType&lt;T&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; infer P ? P : <span class="built_in">never</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-实现Omit"><a href="#3-实现Omit" class="headerlink" title="3 - 实现Omit"></a>3 - 实现Omit</h2><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>利用Exclude</p>
-<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyOmit&lt;T, K&gt; = &#123;</span><br><span class="line">  [P <span class="keyword">in</span> Exclude&lt;keyof T, K&gt;] = T[P]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/ts-1/" data-id="ckz0zb6re0009xln0hxoj5mdo" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-贪心-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/">leetcode 334 递增的三元子序列</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/" class="article-date">
-  <time datetime="2022-01-12T06:53:33.000Z" itemprop="datePublished">2022-01-12</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="递增的三元子序列"><a href="#递增的三元子序列" class="headerlink" title="递增的三元子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实做到这道题的时候，我还没有完全理解什么是贪心<br><br>但是这道题的思路就是，找到三个递增的，–&gt; 找到两组 两个递增的</p>
+      <h2 id="React-官方文档对useCallback的解释"><a href="#React-官方文档对useCallback的解释" class="headerlink" title="React 官方文档对useCallback的解释"></a><a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/hooks-reference.html#usecallback">React 官方文档对useCallback的解释</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedCallbak = useCallback(</span><br><span class="line">    <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        doSomething(a,b);</span><br><span class="line">    &#125;,</span><br><span class="line">    [a, b],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>first = nums[0], seoncd = Number.MAX_VALUE</li>
-<li>遍历这个数组 如果当前这个数 已经比second 大了，那么就找到了</li>
-<li>如果比second小 但是比first大，那么新的second出现了</li>
-<li>如果比first小，那么新的first出现了</li>
+<li>返回值是一个memoized函数</li>
+<li>把内联回调函数<code>() =&gt; &#123; doSomething(a,b)&#125;</code>及依赖项数组<code>[a,b]</code>作为参数传入useCallback，它将返回回调函数的memoized版本，该回调函数仅在某个依赖改变时才会更新。</li>
+<li><mark>用途！！！ 当你把回调函数传递给经过优化的并使用引用相等性去避免非必要渲染（例如 shouldComponentUpdate）的子组件时 （听不懂没关系看下面的场景)</mark></li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> increasingTriplet = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> first = nums[<span class="number">0</span>], second = <span class="built_in">Number</span>.MAX_VALUE, i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = nums[i];</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; second) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; first) &#123;</span><br><span class="line">            second = temp;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            first = temp</span><br><span class="line">        &#125;</span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/334.png" alt="334"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/%E8%B4%AA%E5%BF%83-3/" data-id="ckz0zb6rw0013xln095npamuk" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-栈-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/08/%E6%A0%88-3/">leetcode 1614 括号的最大嵌套深度</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/08/%E6%A0%88-3/" class="article-date">
-  <time datetime="2022-01-08T03:13:58.000Z" itemprop="datePublished">2022-01-08</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="括号的最大嵌套深度"><a href="#括号的最大嵌套深度" class="headerlink" title="括号的最大嵌套深度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-nesting-depth-of-the-parentheses/">括号的最大嵌套深度</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>可以用栈来做，但这道题，其实用两个字符串就可以很好的解决这个问题</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span>, tempRes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            res ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">            res --;</span><br><span class="line">        &#125;</span><br><span class="line">       tempRes = <span class="built_in">Math</span>.max(tempRes, res)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempRes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1614.png" alt="1614"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/08/%E6%A0%88-3/" data-id="ckz0zb6ro000lxln0h3mpa314" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-dfs-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/06/dfs-1/">leetcode 200 岛屿数量</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/06/dfs-1/" class="article-date">
-  <time datetime="2022-01-06T03:51:01.000Z" itemprop="datePublished">2022-01-06</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="岛屿数量"><a href="#岛屿数量" class="headerlink" title="岛屿数量"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">岛屿数量</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先想到dfs广度优先搜索，遍历整个二维数组，等出现为1的情况 进入dfs的操作函数<br></p>
-<p>具体操作：</p>
+<h2 id="我遇到的场景"><a href="#我遇到的场景" class="headerlink" title="我遇到的场景"></a>我遇到的场景</h2><p>场景描述： 输入关键字筛选符合条件的列表</p>
+<h3 id="优化前"><a href="#优化前" class="headerlink" title="优化前"></a>优化前</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">React.useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!searchTerm) <span class="keyword">return</span>;</span><br><span class="line">    dispatchStories(&#123; <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_INIT&#x27;</span> &#125;);</span><br><span class="line">    fetch(<span class="string">`<span class="subst">$&#123;API_ENDPOINT&#125;</span><span class="subst">$&#123;searchTerm&#125;</span>`</span>) </span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> response.json()) </span><br><span class="line">        .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">        dispatchStories(&#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_SUCCESS&#x27;</span>, <span class="attr">payload</span>: result.hits,</span><br><span class="line">        &#125;); &#125;)</span><br><span class="line">        .catch(<span class="function">() =&gt;</span></span><br><span class="line">            dispatchStories(&#123; <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_FAILURE&#x27;</span> &#125;)</span><br><span class="line">        );</span><br><span class="line">&#125;, [searchTerm]);</span><br></pre></td></tr></table></figure>
+<p>存在的问题：每当输入框中输入内容就重新获取一次数据 （searchTerm是输入框的value），会给服务端造成压力</p>
+<h3 id="优化后"><a href="#优化后" class="headerlink" title="优化后"></a>优化后</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> handleFetchStories = React.useCallback(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!searchTerm) <span class="keyword">return</span>;</span><br><span class="line">    dispatchStories(&#123; <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_INIT&#x27;</span> &#125;);</span><br><span class="line">    fetch(<span class="string">`<span class="subst">$&#123;API_ENDPOINT&#125;</span><span class="subst">$&#123;searchTerm&#125;</span>`</span>) </span><br><span class="line">        .then(<span class="function"><span class="params">response</span> =&gt;</span> response.json()) </span><br><span class="line">        .then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">            dispatchStories(&#123;</span><br><span class="line">                <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_SUCCESS&#x27;</span>, <span class="attr">payload</span>: result.hits,</span><br><span class="line">            &#125;); </span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function">() =&gt;</span></span><br><span class="line">            dispatchStories(&#123; <span class="attr">type</span>: <span class="string">&#x27;STORIES_FETCH_FAILURE&#x27;</span> &#125;)</span><br><span class="line">        );</span><br><span class="line">&#125;, [searchTerm]); </span><br><span class="line"></span><br><span class="line">∏</span><br><span class="line">React.useEffect(<span class="function">() =&gt;</span> &#123; </span><br><span class="line">    handleFetchStories(); </span><br><span class="line">&#125;, [handleFetchStories]); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>优化点： </p>
+<ul>
+<li>对于<code>useCallback</code> hook来说，每当其依赖数组<code>[searchTerm]</code>改变时，就会创建一个memoized函数</li>
+<li>因为<code>useEffect</code>依赖于<code>[handleFetchStories]</code>也就是useCallback返回的memoized函数，所以<code>handleFetchStories</code>会再次运行</li>
+</ul>
+<p>运行流程</p>
+<blockquote>
 <ol>
-<li>遇到1 首先把它变成0，防止后续检索到 重复遍历</li>
-<li>检索1的上下左右 如果为1 继续检索 如果是0 return出去</li>
+<li>change: searchTerm</li>
+<li>implicit change: handleFetchStories</li>
+<li>run: side-effect</li>
 </ol>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;character[][]&#125;</span> <span class="variable">grid</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numIslands = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> m = grid.length, n = grid[<span class="number">0</span>].length, res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">i,j</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span>|| i &gt; m - <span class="number">1</span> || j &lt; <span class="number">0</span>|| j &gt; n - <span class="number">1</span> || grid[i][j] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        grid[i][j] = <span class="number">0</span>;</span><br><span class="line">        dfs(i, j + <span class="number">1</span>);</span><br><span class="line">        dfs(i ,j - <span class="number">1</span>);</span><br><span class="line">        dfs(i - <span class="number">1</span>,j);</span><br><span class="line">        dfs(i + <span class="number">1</span>, j)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; m; x++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> y = <span class="number">0</span>; y &lt; n; y++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[x][y] === <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                res ++;</span><br><span class="line">                dfs(x,y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/200.png" alt="200"></p>
-
-
+</blockquote>
+<p>如果不使用<code>useCallback</code>的话，每当有组件渲染，就会创建一个新的<code>handleFetchStories</code>方法。就会每次都执行useEffect，改变state，再次出发handleFectStories<br>运行流程（不好👎版）</p>
+<blockquote>
+<ol>
+<li>define: handleFetchStories</li>
+<li>run: side-effect</li>
+<li>update: state</li>
+<li>re-render: component</li>
+<li>re-define: handleFetchStories</li>
+</ol>
+</blockquote>
+<h2 id="useCallback-实践之-避免死循环（简单版）"><a href="#useCallback-实践之-避免死循环（简单版）" class="headerlink" title="useCallback 实践之 避免死循环（简单版）"></a>useCallback 实践之 避免死循环（简单版）</h2><p>这里直接放一个死循环的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [val, setVal] = useState(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      setVal(<span class="string">&quot;new data &quot;</span> + count);</span><br><span class="line">      count++;</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Child</span> <span class="attr">val</span>=<span class="string">&#123;val&#125;</span> <span class="attr">getData</span>=<span class="string">&#123;getData&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">&#123;val, getData&#125;</span>) </span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    getData();</span><br><span class="line">  &#125;, [getData]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;val&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这段代码就是记录getData的调用次数</li>
+</ul>
+<p>看下代码的执行过程</p>
+<blockquote>
+<ol>
+<li>App组件渲染Child组件，将<code>val</code>和<code>getData</code>通过prop传递</li>
+<li>Child组件通过useEffect获取数据，因为依赖<code>[getData]</code>,所以加入依赖列表</li>
+<li><code>getData</code>执行的时候，会调用<code>setVal</code>给val赋值，App组件就会重新渲染</li>
+<li>App重新渲染，会生成<code>新的getData</code>函数，传给Child组件</li>
+<li>Child发现getData又变了，就又会出发useEffect函数，开始循环了</li>
+</ol>
+</blockquote>
+<p><mark>如果明确getData只会执行一次，那么可以将useEffect的依赖设为[]</mark></p>
+<p>回到现实情况，大多数的需求都是getData改变，需要重新获取数据，<code>useCallback</code>出现了！！！！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getData = useCallback(<span class="function">() =&gt;</span> &#123;<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    setVal(<span class="string">&quot;new Data&quot;</span> + count);</span><br><span class="line">    count++;</span><br><span class="line">&#125;,<span class="number">500</span></span><br><span class="line">),[]<span class="comment">//这里如果有依赖项可以加进来，就能保证如果依赖不变，函数引用不会改变</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="useCallback-实践之-避免死循环（复杂版）"><a href="#useCallback-实践之-避免死循环（复杂版）" class="headerlink" title="useCallback 实践之 避免死循环（复杂版）"></a>useCallback 实践之 避免死循环（复杂版）</h2><p>如果在getData中依赖了state的值 val怎么办！！<br><br>我们希望 val变 但是getData的引用不变，同时取到最新的val的值，可以通过自定义hook去掉</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useRefCallback</span>(<span class="params">fn,dependencies</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> ref = useRef(fn);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//每次调用，fn都是一个全新的函数，函数中的变量有自己的作用域</span></span><br><span class="line">    <span class="comment">//当依赖改变，传入的fn的依赖也会更新，ref的指向为新传入的fn</span></span><br><span class="line"></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        ref.current = fn;</span><br><span class="line">    &#125;,[fn,...dependencies]);<span class="comment">//如果fn是稳定不变的 就可以从依赖列表中去掉，如果fn会改变 就要加入</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> useCallback(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> fn = fn.current;</span><br><span class="line">        <span class="keyword">return</span> fn();</span><br><span class="line">    &#125;,[ref])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/06/dfs-1/" data-id="ckz0zb6r60001xln091vr9spp" class="article-share-link">
+      <a data-url="http://example.com/2022/01/04/react-1/" data-id="ckz0zb6rb0004xln0cxhh56lr" class="article-share-link">
         Share
       </a>
       
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
 
     </footer>
 
@@ -550,7 +169,7 @@
 
 </article>
     
-    <article id="post-栈-2" class="article article-type-post" itemscope
+    <article id="post-矩阵-1" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -559,7 +178,7 @@
       
 
 <h2 itemprop="name">
-  <a class="article-title" href="/2022/01/06/%E6%A0%88-2/">leetcode 71 简化路径</a>
+  <a class="article-title" href="/2022/01/03/%E7%9F%A9%E9%98%B5-1/">leetcode 2022 将一维数组转变成二维数组</a>
 </h2>
 
 
@@ -569,8 +188,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/01/06/%E6%A0%88-2/" class="article-date">
-  <time datetime="2022-01-06T03:02:56.000Z" itemprop="datePublished">2022-01-06</time>
+      <a href="/2022/01/03/%E7%9F%A9%E9%98%B5-1/" class="article-date">
+  <time datetime="2022-01-03T06:31:03.000Z" itemprop="datePublished">2022-01-03</time>
 </a>
       
     </div>
@@ -584,19 +203,374 @@
         
       
       
-      <h2 id="简化路径"><a href="#简化路径" class="headerlink" title="简化路径"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/">简化路径</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>出栈入栈问题，想清楚 什么情况入栈，什么情况出栈</p>
-<ul>
-<li>入栈：真的是目录名称</li>
-<li>出栈：只有..才返回上一级 也就是出栈</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">path</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> simplifyPath = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (path.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> arr = path.split(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> stack = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] === <span class="string">&#x27;.&#x27;</span> || arr[i] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i] === <span class="string">&#x27;..&#x27;</span>) &#123;</span><br><span class="line">            stack.pop()</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            stack.push(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span>+stack.join(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/convert-1d-array-into-2d-array/">将一维数组转变成二维数组</a></p>
+<p>思路：思路其实不难，虽然是一道简单题，也许元旦玩switch玩傻了，矩阵换行的时候第一次执行没有写对，才突然想起来没有换行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">original</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">m</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> construct2DArray = <span class="function"><span class="keyword">function</span>(<span class="params">original, m, n</span>) </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">let</span> len = original.length,res = [];</span><br><span class="line">    <span class="keyword">if</span>(len !== (m * n)) &#123;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;    </span><br><span class="line">        <span class="keyword">let</span> row = []</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i * n; j &lt; n * (i + <span class="number">1</span>); j++) &#123;</span><br><span class="line">            row.push(original[j])</span><br><span class="line">        &#125;</span><br><span class="line">        res.push(row)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/71.png" alt="844"></p>
+<p>最后贴贴我的通过图片✅<br><img src="/images/leetcode/2022.png" alt="2022"></p>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/06/%E6%A0%88-2/" data-id="ckz0zb6rn000kxln04g8reth6" class="article-share-link">
+      <a data-url="http://example.com/2022/01/03/%E7%9F%A9%E9%98%B5-1/" data-id="ckz0zb6rt000yxln03le9gdu7" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag">矩阵</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-回溯-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/31/%E5%9B%9E%E6%BA%AF-1/">leetcode 17 电话号码的组合</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" class="article-date">
+  <time datetime="2021-12-31T04:01:35.000Z" itemprop="datePublished">2021-12-31</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">电话号码的组合</a></p>
+<p>思路其实非常清晰： 由于题目要求四位 可以直接while+ma<br></p>
+<p>中间卡在了数组扁平化，可以直接用es6的新方法，flat</p>
+<p><code>arr.flat(length)</code><br>不会改变原数组,返回值是改变后的数组，如果知道深度，可以直接填，不知道可以Infinity</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">digits</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> letterCombinations = <span class="function"><span class="keyword">function</span>(<span class="params">digits</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> digitsObj = &#123;</span><br><span class="line">        <span class="number">1</span>:[],</span><br><span class="line">        <span class="number">2</span>: [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>],</span><br><span class="line">        <span class="number">3</span>: [<span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>],</span><br><span class="line">        <span class="number">4</span>: [<span class="string">&quot;g&quot;</span>,<span class="string">&quot;h&quot;</span>,<span class="string">&quot;i&quot;</span>],</span><br><span class="line">        <span class="number">5</span>: [<span class="string">&quot;j&quot;</span>,<span class="string">&quot;k&quot;</span>,<span class="string">&quot;l&quot;</span>],</span><br><span class="line">        <span class="number">6</span>: [<span class="string">&quot;m&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;o&quot;</span>],</span><br><span class="line">        <span class="number">7</span>: [<span class="string">&quot;p&quot;</span>,<span class="string">&quot;q&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;s&quot;</span>],</span><br><span class="line">        <span class="number">8</span>: [<span class="string">&quot;t&quot;</span>, <span class="string">&quot;u&quot;</span>,<span class="string">&quot;v&quot;</span>],</span><br><span class="line">        <span class="number">9</span>: [<span class="string">&quot;w&quot;</span>,<span class="string">&quot;x&quot;</span>,<span class="string">&quot;y&quot;</span>,<span class="string">&quot;z&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!digits) &#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(digits.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> digitsObj[digits[<span class="number">0</span>]]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> cur = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> len = digits.length;</span><br><span class="line">    <span class="keyword">let</span> res = digitsObj[digits[<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">while</span>(cur &lt; len) &#123;</span><br><span class="line">        res = res.map(<span class="function"><span class="params">item</span> =&gt;</span>  digitsObj[digits[cur]].map(<span class="function"><span class="params">dig</span> =&gt;</span> item + dig))</span><br><span class="line">        cur++;</span><br><span class="line">        res = res.flat()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res.flat(len - <span class="number">1</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片✅<br><img src="/images/leetcode/17.png" alt="17"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/31/%E5%9B%9E%E6%BA%AF-1/" data-id="ckz0zb6ri000exln0hc439hxk" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-滑动窗口-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/">leetcode 713 乘积小于k的子数组</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" class="article-date">
+  <time datetime="2021-12-28T03:13:36.000Z" itemprop="datePublished">2021-12-28</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/28/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-2/" data-id="ckz0zb6rs000vxln04b1jcet3" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-滑动窗口-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/">leetcode 438 找到字符串中所有字母异位词</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" class="article-date">
+  <time datetime="2021-12-27T07:03:26.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">找到字符串中所有字母异位词</a></p>
+<p>滑动窗口的题关键思路是，考虑什么时候 break；能够快速的 break 才是避免超时的关键</p>
+<p>这里还忘记了深拷贝 <code>JSON.parse(JSON.stringify(obj))</code> ,复习下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">p</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findAnagrams = <span class="function"><span class="keyword">function</span> (<span class="params">s, p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; p.length; i++) &#123;</span><br><span class="line">    obj[p[i]] = obj[p[i]] ? obj[p[i]] + <span class="number">1</span> : <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = p.length - <span class="number">1</span>,</span><br><span class="line">    len = p.length,</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (right &lt; s.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isSame(s.substr(left, len), obj)) res.push(left);</span><br><span class="line">    left++;</span><br><span class="line">    right++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSame</span>(<span class="params">a, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> buff = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; a.length; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!buff[a[j]]) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      buff[a[j]]--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/438.png" alt="438"></p>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/27/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1/" data-id="ckz0zb6rs000uxln03iwhddn2" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-双指针-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-2/">leetcode 11  盛最多水的容器</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-2/" class="article-date">
+  <time datetime="2021-12-27T06:15:53.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">盛最多水的容器</a></p>
+<p>其实很简单，不要被 middle 就吓趴了哦<br></p>
+<p>双指针问题，left，right，算面积，res 永远取最大</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">height</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxArea = <span class="function"><span class="keyword">function</span> (<span class="params">height</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = height.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">let</span> tempRes = <span class="built_in">Math</span>.min(height[left], height[right]) * (right - left);</span><br><span class="line">    res = <span class="built_in">Math</span>.max(res, tempRes);</span><br><span class="line">    height[right] &gt; height[left] ? left++ : right--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过图片 ✅<br><img src="/images/leetcode/11.png" alt="11"></p>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-2/" data-id="ckz0zb6rh000cxln0bzpja37r" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-双指针-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/">leetcode 986 区间列表的交集</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/" class="article-date">
+  <time datetime="2021-12-27T05:38:45.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/interval-list-intersections/">区间列表的交集</a></p>
+<p>刚开始走了一点弯路，实际上 left，right 都很好理解，最关键的是谁在递增，递增条件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">firstList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">secondList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intervalIntersection = <span class="function"><span class="keyword">function</span> (<span class="params">firstList, secondList</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">    j = <span class="number">0</span>,</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (i &lt; firstList.length &amp;&amp; j &lt; secondList.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="built_in">Math</span>.max(firstList[i][<span class="number">0</span>], secondList[j][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">let</span> right = <span class="built_in">Math</span>.min(firstList[i][<span class="number">1</span>], secondList[j][<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (left &lt;= right) &#123;</span><br><span class="line">      res.push([left, right]);</span><br><span class="line">    &#125;</span><br><span class="line">    firstList[i][<span class="number">1</span>] &gt; secondList[j][<span class="number">1</span>] ? j++ : i++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/986.png" alt="986"></p>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/" data-id="ckz0zb6rg000axln02frh0dg8" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-栈-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/27/%E6%A0%88-1/">leetcode 844 比较含退格的字符串</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/27/%E6%A0%88-1/" class="article-date">
+  <time datetime="2021-12-27T03:00:42.000Z" itemprop="datePublished">2021-12-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/backspace-string-compare/">比较含退格的字符串</a></p>
+<p>思路很简单就是 有#就 pop，不是#就 push 最后比较两个字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">t</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> backspaceCompare = <span class="function"><span class="keyword">function</span> (<span class="params">s, t</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stackS = [],</span><br><span class="line">    stackT = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[i] === <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stackS.length) &#123;</span><br><span class="line">        stackS.pop();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      stackS.push(s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; t.length; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (t[j] === <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (stackT.length) &#123;</span><br><span class="line">        stackT.pop();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      stackT.push(t[j]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stackS.join(<span class="string">&quot;&quot;</span>) === stackT.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/844.png" alt="844"></p>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/27/%E6%A0%88-1/" data-id="ckz0zb6rm000ixln090wf1cp3" class="article-share-link">
         Share
       </a>
       
@@ -612,7 +586,7 @@
 
 </article>
     
-    <article id="post-模拟-1" class="article article-type-post" itemscope
+    <article id="post-贪心-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -621,7 +595,7 @@
       
 
 <h2 itemprop="name">
-  <a class="article-title" href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/">leetcode 1576 替换所有的问号</a>
+  <a class="article-title" href="/2021/12/24/%E8%B4%AA%E5%BF%83-2/">leetcode 1005 K次取反后最大化的数组和</a>
 </h2>
 
 
@@ -631,8 +605,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" class="article-date">
-  <time datetime="2022-01-05T03:34:05.000Z" itemprop="datePublished">2022-01-05</time>
+      <a href="/2021/12/24/%E8%B4%AA%E5%BF%83-2/" class="article-date">
+  <time datetime="2021-12-24T09:14:03.000Z" itemprop="datePublished">2021-12-24</time>
 </a>
       
     </div>
@@ -646,19 +620,76 @@
         
       
       
-      <h2 id="替换所有的问号"><a href="#替换所有的问号" class="headerlink" title="替换所有的问号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/">替换所有的问号</a></h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这种easy题 是要认真读题的，题目只是要求连续的字符不能重复，那我们其实准备三个字符就好</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> modifyString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> tempS = s.split(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tempS.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(tempS[i] === <span class="string">&#x27;?&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span>(cur &lt; <span class="number">3</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[cur] !== tempS[i - <span class="number">1</span>] &amp;&amp; arr[cur] !== tempS[i + <span class="number">1</span>] ) &#123;</span><br><span class="line">                    tempS[i] = arr[cur];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               cur++;</span><br><span class="line">           &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempS.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/24/%E8%B4%AA%E5%BF%83-2/" data-id="ckz0zb6rv0011xln08trdfl55" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li></ul>
 
-<h3 id="提交记录"><a href="#提交记录" class="headerlink" title="提交记录"></a>提交记录</h3><p><img src="/images/leetcode/1576.png" alt="1576"></p>
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-贪心-1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/24/%E8%B4%AA%E5%BF%83-1/">leetcode 455 分发饼干</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/24/%E8%B4%AA%E5%BF%83-1/" class="article-date">
+  <time datetime="2021-12-24T07:52:54.000Z" itemprop="datePublished">2021-12-24</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/assign-cookies/">分发饼干</a></p>
+<p>啥是贪心呢？<br><br>贪心就是找到一个规则，按照这个规则执行下去<br></p>
+<p>对于分发饼干来说，我第一次想到使用两个 hashMap 去做，但实际上，贪心——只需要优先满足最小的/最大的<br><br><br>这里优先满足最小为例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">g</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> findContentChildren = <span class="function"><span class="keyword">function</span> (<span class="params">g, s</span>) </span>&#123;</span><br><span class="line">  g.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">  s.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">  <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt; g.length &amp;&amp; j &lt; s.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[j] &gt;= g[i]) &#123;</span><br><span class="line">      j++;</span><br><span class="line">      i++;</span><br><span class="line">      res++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      j++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/455.png" alt="455"></p>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckz0zb6rp000nxln08a8z71pc" class="article-share-link">
+      <a data-url="http://example.com/2021/12/24/%E8%B4%AA%E5%BF%83-1/" data-id="ckz0zb6ru000zxln0fk5vhatw" class="article-share-link">
         Share
       </a>
       
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" rel="tag">贪心算法</a></li></ul>
 
     </footer>
 
@@ -675,7 +706,7 @@
 
   
   <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next</a>
+    <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
   
 </section>
