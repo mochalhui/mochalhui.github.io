@@ -63,6 +63,112 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-react-8" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/06/08/react-8/">react lifecycle</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/06/08/react-8/" class="article-date">
+  <time datetime="2022-06-08T07:32:11.000Z" itemprop="datePublished">2022-06-08</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <p><img src="/images/react/react-lifecycle.png" alt="react-lifecycle"></p>
+
+
+<h2 id="react-lifecycle"><a href="#react-lifecycle" class="headerlink" title="react lifecycle"></a>react lifecycle</h2><p>Each React component has a life cycle, which consists of three phases:</p>
+<ul>
+<li>mounting: that is inserting elements into the DOM</li>
+<li>updating: which invovles methods for updating components in the DOM</li>
+<li>unmounting: that is removing a component from the DOM</li>
+</ul>
+<p>&lt;other lifecycle are deprecated in React 17&gt;</p>
+<h2 id="class-based-and-functional-component"><a href="#class-based-and-functional-component" class="headerlink" title="class-based and functional component"></a>class-based and functional component</h2><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidUpdate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>useEffect </p>
+<ul>
+<li>the dependence array is a <code>[]</code>, which means only evaluate the hook on mount</li>
+<li>the dependence array is <code>undefined</code>, which will evaluate every re-render</li>
+</ul>
+<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">       <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><table>
+<thead>
+<tr>
+<th>diff</th>
+<th>functional component</th>
+<th>class-based component</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flexibility</td>
+<td>functional will be more flexbility</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>allow the developer to decide how tightly or loosely coupled the lifecycle methods</td>
+<td>any setup that was donw in <code>componentDidMount</code> would have to make values available to <code>componentWillUnmount</code> in order to clean up</td>
+</tr>
+<tr>
+<td>-</td>
+<td>there is no need to do that since the mounting and unmounting logic is enclosed inside the same function scope/ but rig need to have a separation can opt to use two separate hooks</td>
+<td></td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/08/react-8/" data-id="cl459wh4k000008n09j7160p4" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-ts-2" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -1332,64 +1438,6 @@
 
 </article>
     
-    <article id="post-模拟-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/">leetcode 1576 替换所有的问号</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" class="article-date">
-  <time datetime="2022-01-05T03:34:05.000Z" itemprop="datePublished">2022-01-05</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="替换所有的问号"><a href="#替换所有的问号" class="headerlink" title="替换所有的问号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/">替换所有的问号</a></h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>这种easy题 是要认真读题的，题目只是要求连续的字符不能重复，那我们其实准备三个字符就好</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> modifyString = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">let</span> tempS = s.split(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; tempS.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(tempS[i] === <span class="string">&#x27;?&#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span>(cur &lt; <span class="number">3</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[cur] !== tempS[i - <span class="number">1</span>] &amp;&amp; arr[cur] !== tempS[i + <span class="number">1</span>] ) &#123;</span><br><span class="line">                    tempS[i] = arr[cur];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               cur++;</span><br><span class="line">           &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempS.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="提交记录"><a href="#提交记录" class="headerlink" title="提交记录"></a>提交记录</h3><p><img src="/images/leetcode/1576.png" alt="1576"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/05/%E6%A8%A1%E6%8B%9F-1/" data-id="ckz0zb6rp000nxln08a8z71pc" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
   </article>
   
 
@@ -1438,6 +1486,14 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
     </li>
     
     <li class="nav-item">

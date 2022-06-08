@@ -585,4 +585,64 @@
         <tag>typescript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>react lifecycle</title>
+    <url>/2022/06/08/react-8/</url>
+    <content><![CDATA[<p><img src="/images/react/react-lifecycle.png" alt="react-lifecycle"></p>
+
+
+<h2 id="react-lifecycle"><a href="#react-lifecycle" class="headerlink" title="react lifecycle"></a>react lifecycle</h2><p>Each React component has a life cycle, which consists of three phases:</p>
+<ul>
+<li>mounting: that is inserting elements into the DOM</li>
+<li>updating: which invovles methods for updating components in the DOM</li>
+<li>unmounting: that is removing a component from the DOM</li>
+</ul>
+<p>&lt;other lifecycle are deprecated in React 17&gt;</p>
+<h2 id="class-based-and-functional-component"><a href="#class-based-and-functional-component" class="headerlink" title="class-based and functional component"></a>class-based and functional component</h2><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidUpdate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>useEffect </p>
+<ul>
+<li>the dependence array is a <code>[]</code>, which means only evaluate the hook on mount</li>
+<li>the dependence array is <code>undefined</code>, which will evaluate every re-render</li>
+</ul>
+<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">       <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><table>
+<thead>
+<tr>
+<th>diff</th>
+<th>functional component</th>
+<th>class-based component</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flexibility</td>
+<td>functional will be more flexbility</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>allow the developer to decide how tightly or loosely coupled the lifecycle methods</td>
+<td>any setup that was donw in <code>componentDidMount</code> would have to make values available to <code>componentWillUnmount</code> in order to clean up</td>
+</tr>
+<tr>
+<td>-</td>
+<td>there is no need to do that since the mounting and unmounting logic is enclosed inside the same function scope/ but rig need to have a separation can opt to use two separate hooks</td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
 </search>
