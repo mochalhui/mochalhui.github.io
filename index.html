@@ -63,6 +63,135 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-层序遍历系列题" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/06/27/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E7%B3%BB%E5%88%97%E9%A2%98/">层序遍历系列题</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/06/27/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E7%B3%BB%E5%88%97%E9%A2%98/" class="article-date">
+  <time datetime="2022-06-27T12:54:21.000Z" itemprop="datePublished">2022-06-27</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h1 id="二叉树层序遍历的关键"><a href="#二叉树层序遍历的关键" class="headerlink" title="二叉树层序遍历的关键"></a>二叉树层序遍历的关键</h1><p><code>list.flatMap(node =&gt; [node.left, node.right]).filter(Boolean)</code></p>
+<h2 id="找到左下角的值"><a href="#找到左下角的值" class="headerlink" title="找到左下角的值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">找到左下角的值</a></h2><p>层序遍历 冲到最后一层</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!root) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> res = root.val</span><br><span class="line">  <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!list.length)&#123;</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    res = list[<span class="number">0</span>].val</span><br><span class="line">    <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">    dfs(nextLevel)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  dfs([root])</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在每个树行中找最大值"><a href="#在每个树行中找最大值" class="headerlink" title="在每个树行中找最大值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">在每个树行中找最大值</a></h2><p>层序遍历， 每层寻找最大值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">       <span class="keyword">return</span> []</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        res.push(<span class="built_in">Math</span>.max(...(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))))</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root])</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="二叉树的锯齿形层序遍历"><a href="#二叉树的锯齿形层序遍历" class="headerlink" title="二叉树的锯齿形层序遍历"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/submissions/">二叉树的锯齿形层序遍历</a></h2><p>层序遍历 左右倒 注意reverse()会改变原数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list, time</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(time % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            res.push(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> tempList = [...list]</span><br><span class="line">            res.push(tempList.reverse().map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel,time + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root], <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/27/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E7%B3%BB%E5%88%97%E9%A2%98/" data-id="cl4wqrxox0000ven00ln07da4" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="tag">层序遍历</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
+    <article id="post-n数之xx" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/06/16/n%E6%95%B0%E4%B9%8Bxx/">n数之和/差 + 变形</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/06/16/n%E6%95%B0%E4%B9%8Bxx/" class="article-date">
+  <time datetime="2022-06-16T13:19:03.000Z" itemprop="datePublished">2022-06-16</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="数组中的-k-diff-数对"><a href="#数组中的-k-diff-数对" class="headerlink" title="数组中的 k-diff 数对"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/k-diff-pairs-in-an-array/">数组中的 k-diff 数对</a></h2><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><blockquote>
+<p>误区： 双指针不一定是 从两端开始，也可以从一个方向开始，🧠要灵活</p>
+</blockquote>
+<ul>
+<li>从0 开始，有两个指针x , y，找数值对</li>
+<li>规避【不重复】— <code>nums[x] !== nums[x - 1]</code></li>
+<li>规避【k 为 0】— <code>y &lt;= x</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> len = nums.length,res = <span class="number">0</span>, y = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; len - <span class="number">1</span>; x ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x === <span class="number">0</span> || nums[x] !== nums[x - <span class="number">1</span>]) &#123;</span><br><span class="line">           </span><br><span class="line">            y = x</span><br><span class="line">            <span class="keyword">while</span> (y &lt; len &amp;&amp; nums[y] - nums[x] &lt; k || y&lt;=x) &#123;</span><br><span class="line">                y ++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(nums[y] - nums[x] === k) &#123;</span><br><span class="line">                res ++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="哈希✅（最优解）"><a href="#哈希✅（最优解）" class="headerlink" title="哈希✅（最优解）"></a>哈希✅（最优解）</h3><ul>
+<li>只需要遍历一次，用一个set存放 已经走过的value，用res存放 另一个能diff为k的value</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> visitor = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">let</span> res =  <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(visitor.has(nums[i] - k)) &#123;</span><br><span class="line">            res.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!visitor.has(nums[i]))&#123;</span><br><span class="line">            visitor.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.size</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="找出第-K-小的数对距离"><a href="#找出第-K-小的数对距离" class="headerlink" title="找出第 K 小的数对距离"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-k-th-smallest-pair-distance/">找出第 K 小的数对距离</a></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/16/n%E6%95%B0%E4%B9%8Bxx/" data-id="cl4h1ug9z00009kn078jm55gq" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag">二分查找</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag">双指针</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-位运算-1" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -1326,129 +1455,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-栈-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/08/%E6%A0%88-3/">leetcode 1614 括号的最大嵌套深度</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/08/%E6%A0%88-3/" class="article-date">
-  <time datetime="2022-01-08T03:13:58.000Z" itemprop="datePublished">2022-01-08</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="括号的最大嵌套深度"><a href="#括号的最大嵌套深度" class="headerlink" title="括号的最大嵌套深度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-nesting-depth-of-the-parentheses/">括号的最大嵌套深度</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>可以用栈来做，但这道题，其实用两个字符串就可以很好的解决这个问题</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxDepth = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span>, tempRes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            res ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[i] === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">            res --;</span><br><span class="line">        &#125;</span><br><span class="line">       tempRes = <span class="built_in">Math</span>.max(tempRes, res)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempRes</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1614.png" alt="1614"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/08/%E6%A0%88-3/" data-id="ckz0zb6ro000lxln0h3mpa314" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-dfs-1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/06/dfs-1/">leetcode 200 岛屿数量</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/06/dfs-1/" class="article-date">
-  <time datetime="2022-01-06T03:51:01.000Z" itemprop="datePublished">2022-01-06</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="岛屿数量"><a href="#岛屿数量" class="headerlink" title="岛屿数量"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">岛屿数量</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先想到dfs广度优先搜索，遍历整个二维数组，等出现为1的情况 进入dfs的操作函数<br></p>
-<p>具体操作：</p>
-<ol>
-<li>遇到1 首先把它变成0，防止后续检索到 重复遍历</li>
-<li>检索1的上下左右 如果为1 继续检索 如果是0 return出去</li>
-</ol>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;character[][]&#125;</span> <span class="variable">grid</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> numIslands = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> m = grid.length, n = grid[<span class="number">0</span>].length, res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">i,j</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; <span class="number">0</span>|| i &gt; m - <span class="number">1</span> || j &lt; <span class="number">0</span>|| j &gt; n - <span class="number">1</span> || grid[i][j] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        grid[i][j] = <span class="number">0</span>;</span><br><span class="line">        dfs(i, j + <span class="number">1</span>);</span><br><span class="line">        dfs(i ,j - <span class="number">1</span>);</span><br><span class="line">        dfs(i - <span class="number">1</span>,j);</span><br><span class="line">        dfs(i + <span class="number">1</span>, j)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; m; x++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> y = <span class="number">0</span>; y &lt; n; y++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[x][y] === <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">                res ++;</span><br><span class="line">                dfs(x,y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/200.png" alt="200"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/06/dfs-1/" data-id="ckz0zb6r60001xln091vr9spp" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dfs/" rel="tag">dfs</a></li></ul>
 
     </footer>
 
