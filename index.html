@@ -63,6 +63,66 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-动态机dp" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/06/30/%E5%8A%A8%E6%80%81%E6%9C%BAdp/">动态机dp</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/06/30/%E5%8A%A8%E6%80%81%E6%9C%BAdp/" class="article-date">
+  <time datetime="2022-06-30T11:58:44.000Z" itemprop="datePublished">2022-06-30</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="粉刷房子"><a href="#粉刷房子" class="headerlink" title="粉刷房子"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/JEj789/">粉刷房子</a></h2><p>💡：每一个都和前一个有关，记住这一点就足够了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 粗糙版</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(costs.length).fill(<span class="number">0</span>)</span><br><span class="line">        .map(<span class="function">(<span class="params">item</span>) =&gt;</span> [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp[<span class="number">0</span>] = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp[dp.length - <span class="number">1</span>])</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>💡： 其实如果只关心上一层的状态，则不需要关心其他层，那dp可以是一个一维数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//调整下</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dp = [<span class="number">0</span> , <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> temp = [...dp]</span><br><span class="line">            dp[<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">1</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="最长定差子序列"><a href="#最长定差子序列" class="headerlink" title="最长定差子序列"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-arithmetic-subsequence-of-given-difference/submissions/">最长定差子序列</a></h2><p>💡：不一定是数组！也有可能是Map 是Set， 只需要记住，只和前一个的状态有关 （这里的前一个是前一个定差子序列）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">arr</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">difference</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> longestSubsequence = <span class="function"><span class="keyword">function</span>(<span class="params">arr, difference</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.get(arr[i] - difference)) &#123;</span><br><span class="line">            <span class="keyword">const</span> count = map.get(arr[i] - difference) + <span class="number">1</span></span><br><span class="line">            map.set(arr[i],count)</span><br><span class="line">            res = <span class="built_in">Math</span>.max(res,count )</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(arr[i], <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/30/%E5%8A%A8%E6%80%81%E6%9C%BAdp/" data-id="cl50zxxdf0000o8n00rhp8x5b" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E6%9C%BAdp/" rel="tag">动态机dp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-层序遍历系列题" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -1390,71 +1450,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-贪心-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/">leetcode 334 递增的三元子序列</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/12/%E8%B4%AA%E5%BF%83-3/" class="article-date">
-  <time datetime="2022-01-12T06:53:33.000Z" itemprop="datePublished">2022-01-12</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="递增的三元子序列"><a href="#递增的三元子序列" class="headerlink" title="递增的三元子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实做到这道题的时候，我还没有完全理解什么是贪心<br><br>但是这道题的思路就是，找到三个递增的，–&gt; 找到两组 两个递增的</p>
-<ul>
-<li>first = nums[0], seoncd = Number.MAX_VALUE</li>
-<li>遍历这个数组 如果当前这个数 已经比second 大了，那么就找到了</li>
-<li>如果比second小 但是比first大，那么新的second出现了</li>
-<li>如果比first小，那么新的first出现了</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> increasingTriplet = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> first = nums[<span class="number">0</span>], second = <span class="built_in">Number</span>.MAX_VALUE, i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = nums[i];</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; second) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; first) &#123;</span><br><span class="line">            second = temp;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            first = temp</span><br><span class="line">        &#125;</span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/334.png" alt="334"></p>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/12/%E8%B4%AA%E5%BF%83-3/" data-id="ckz0zb6rw0013xln095npamuk" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
 
     </footer>
 
