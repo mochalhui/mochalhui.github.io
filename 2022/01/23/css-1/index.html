@@ -129,10 +129,21 @@
 <h2 id="css-文字显示单-多行-多余…"><a href="#css-文字显示单-多行-多余…" class="headerlink" title="css 文字显示单/多行 多余…"></a>css 文字显示单/多行 多余…</h2><h3 id="单行"><a href="#单行" class="headerlink" title="单行"></a>单行</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="多行"><a href="#多行" class="headerlink" title="多行"></a>多行</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>:ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: pre-wrap;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box; //对象作为弹性伸缩盒子</span><br><span class="line">  -webkit-box-orient: vertical; // 子元素排列方式</span><br><span class="line">  -webkit-line-clamp: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="box-sizing-盒模型计算规则"><a href="#box-sizing-盒模型计算规则" class="headerlink" title="box-sizing 盒模型计算规则"></a><code>box-sizing</code> 盒模型计算规则</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">box-sizing</span>: border-box | content-box</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>border-box</code>: padding + border + content width/height = css width/height = actual width/height</p>
+</li>
+<li><p><code>content-box</code>: css width/height + padding + border = actual width/height  [content width/height = css width/height]</p>
+</li>
+<li><p>推荐使用border-box, 少动脑</p>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/23/css-1/" data-id="ckz0zb6r10000xln00uxdh8v2" class="article-share-link">
+      <a data-url="http://example.com/2022/01/23/css-1/" data-id="cl5b2aqg80000npn02p8uedb1" class="article-share-link">
         Share
       </a>
       

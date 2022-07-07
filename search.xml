@@ -64,9 +64,53 @@
 
 <h2 id="css-文字显示单-多行-多余…"><a href="#css-文字显示单-多行-多余…" class="headerlink" title="css 文字显示单/多行 多余…"></a>css 文字显示单/多行 多余…</h2><h3 id="单行"><a href="#单行" class="headerlink" title="单行"></a>单行</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="多行"><a href="#多行" class="headerlink" title="多行"></a>多行</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>:ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: pre-wrap;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box; //对象作为弹性伸缩盒子</span><br><span class="line">  -webkit-box-orient: vertical; // 子元素排列方式</span><br><span class="line">  -webkit-line-clamp: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="多行"><a href="#多行" class="headerlink" title="多行"></a>多行</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden;</span><br><span class="line">  <span class="attribute">text-overflow</span>:ellipsis;</span><br><span class="line">  <span class="attribute">white-space</span>: pre-wrap;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box; //对象作为弹性伸缩盒子</span><br><span class="line">  -webkit-box-orient: vertical; // 子元素排列方式</span><br><span class="line">  -webkit-line-clamp: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="box-sizing-盒模型计算规则"><a href="#box-sizing-盒模型计算规则" class="headerlink" title="box-sizing 盒模型计算规则"></a><code>box-sizing</code> 盒模型计算规则</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">box-sizing</span>: border-box | content-box</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>border-box</code>: padding + border + content width/height = css width/height = actual width/height</p>
+</li>
+<li><p><code>content-box</code>: css width/height + padding + border = actual width/height  [content width/height = css width/height]</p>
+</li>
+<li><p>推荐使用border-box, 少动脑</p>
+</li>
+</ul>
+]]></content>
       <tags>
         <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>viewport和1px</title>
+    <url>/2022/02/04/css-2/</url>
+    <content><![CDATA[<h2 id="viewport和1px"><a href="#viewport和1px" class="headerlink" title="viewport和1px"></a>viewport和1px</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>高清屏中——移动端的1px很粗，无论是h5还是rn,都需要重新进行适配</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
+<li>DPR(devicePIxelRatio)设备像素比，它是默认缩放为100%的情况下，设备像素和css像素的比值。简单的说，这应该告诉浏览器应该使用多少个屏幕的实际像素来绘制单个css像素</li>
+<li>用户缩放。用户把页面放大一倍，css中1px所代表的物理像素也会增加一倍。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">value = <span class="built_in">window</span>.devicePixelRatio;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>如果1px是2px，那么0.5px不就是1px？？<br/><br>事实不一定，Retina屏浏览器很有可能不认识0.5px的边框，会变成0px （ios 7 及以前版本，安卓设备表现）<br/><br>我们可以通过检测浏览器能不能处理0.5px，如果处理不了，就给<html>元素加一个class</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (window.devicePixelRatio &amp;&amp; devicePixelRatio &gt;= 2) &#123;</span><br><span class="line">  var testElem = document.createElement(&#x27;div&#x27;);</span><br><span class="line">  testElem.style.border = &#x27;.5px solid transparent&#x27;;</span><br><span class="line">  document.body.appendChild(testElem);</span><br><span class="line">  if (testElem.offsetHeight == 1)</span><br><span class="line">  &#123;</span><br><span class="line">    document.querySelector(&#x27;html&#x27;).classList.add(&#x27;hairlines&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">  document.body.removeChild(testElem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  border: 1px solid #bbb;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.hairlines div &#123;</span><br><span class="line">  border-width: 0.5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 884 两句话中的不常见单词</title>
+    <url>/2022/01/30/hashmap-1/</url>
+    <content><![CDATA[<h2 id="两句话中的不常见单词"><a href="#两句话中的不常见单词" class="headerlink" title="两句话中的不常见单词"></a><a href="https://leetcode-cn.com/problems/uncommon-words-from-two-sentences/">两句话中的不常见单词</a></h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>思路 暂时没想到最优的解法</p>
+<p>嘿嘿最近在忙项目都没怎么做题学习 这样不好不好，以后晚上一定要学学习！！！</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> uncommonFromSentences = <span class="function"><span class="keyword">function</span>(<span class="params">s1, s2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr1 = s1.split(<span class="string">&#x27; &#x27;</span>), arr2 = s2.split(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> res = &#123;&#125;, arr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr1.length; i++) &#123;</span><br><span class="line">        res[arr1[i]] = res[arr1[i]] ? (res[arr1[i]] + <span class="number">1</span>) : <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; arr2.length; j++) &#123;</span><br><span class="line">        res[arr2[j]] = res[arr2[j]] ? (res[arr2[j]] + <span class="number">1</span>) : <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> res) &#123;</span><br><span class="line">        res[item] === <span class="number">1</span> &amp;&amp; arr.push(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/884.png" alt="884"></p>
+
+]]></content>
+      <tags>
+        <tag>哈希表</tag>
       </tags>
   </entry>
   <entry>
@@ -88,17 +132,26 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode 884 两句话中的不常见单词</title>
-    <url>/2022/01/30/hashmap-1/</url>
-    <content><![CDATA[<h2 id="两句话中的不常见单词"><a href="#两句话中的不常见单词" class="headerlink" title="两句话中的不常见单词"></a><a href="https://leetcode-cn.com/problems/uncommon-words-from-two-sentences/">两句话中的不常见单词</a></h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>思路 暂时没想到最优的解法</p>
-<p>嘿嘿最近在忙项目都没怎么做题学习 这样不好不好，以后晚上一定要学学习！！！</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">s2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> uncommonFromSentences = <span class="function"><span class="keyword">function</span>(<span class="params">s1, s2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr1 = s1.split(<span class="string">&#x27; &#x27;</span>), arr2 = s2.split(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> res = &#123;&#125;, arr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr1.length; i++) &#123;</span><br><span class="line">        res[arr1[i]] = res[arr1[i]] ? (res[arr1[i]] + <span class="number">1</span>) : <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; arr2.length; j++) &#123;</span><br><span class="line">        res[arr2[j]] = res[arr2[j]] ? (res[arr2[j]] + <span class="number">1</span>) : <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">in</span> res) &#123;</span><br><span class="line">        res[item] === <span class="number">1</span> &amp;&amp; arr.push(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>n数之和/差 + 变形</title>
+    <url>/2022/06/16/n%E6%95%B0%E4%B9%8Bxx/</url>
+    <content><![CDATA[<h2 id="数组中的-k-diff-数对"><a href="#数组中的-k-diff-数对" class="headerlink" title="数组中的 k-diff 数对"></a><a href="https://leetcode.cn/problems/k-diff-pairs-in-an-array/">数组中的 k-diff 数对</a></h2><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><blockquote>
+<p>误区： 双指针不一定是 从两端开始，也可以从一个方向开始，🧠要灵活</p>
+</blockquote>
+<ul>
+<li>从0 开始，有两个指针x , y，找数值对</li>
+<li>规避【不重复】— <code>nums[x] !== nums[x - 1]</code></li>
+<li>规避【k 为 0】— <code>y &lt;= x</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> len = nums.length,res = <span class="number">0</span>, y = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; len - <span class="number">1</span>; x ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x === <span class="number">0</span> || nums[x] !== nums[x - <span class="number">1</span>]) &#123;</span><br><span class="line">           </span><br><span class="line">            y = x</span><br><span class="line">            <span class="keyword">while</span> (y &lt; len &amp;&amp; nums[y] - nums[x] &lt; k || y&lt;=x) &#123;</span><br><span class="line">                y ++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(nums[y] - nums[x] === k) &#123;</span><br><span class="line">                res ++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="哈希✅（最优解）"><a href="#哈希✅（最优解）" class="headerlink" title="哈希✅（最优解）"></a>哈希✅（最优解）</h3><ul>
+<li>只需要遍历一次，用一个set存放 已经走过的value，用res存放 另一个能diff为k的value</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> visitor = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">let</span> res =  <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(visitor.has(nums[i] - k)) &#123;</span><br><span class="line">            res.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!visitor.has(nums[i]))&#123;</span><br><span class="line">            visitor.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.size</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/884.png" alt="884"></p>
-
-]]></content>
+<h2 id="找出第-K-小的数对距离"><a href="#找出第-K-小的数对距离" class="headerlink" title="找出第 K 小的数对距离"></a><a href="https://leetcode.cn/problems/find-k-th-smallest-pair-distance/">找出第 K 小的数对距离</a></h2>]]></content>
       <tags>
-        <tag>哈希表</tag>
+        <tag>双指针</tag>
+        <tag>哈希</tag>
+        <tag>二分查找</tag>
       </tags>
   </entry>
   <entry>
@@ -200,6 +253,194 @@
       </tags>
   </entry>
   <entry>
+    <title>react-native &amp;&amp; webview &amp;&amp; 端</title>
+    <url>/2022/02/04/react-4/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>进了新公司一个多月，接触rn也有小半个月了，还没有搞懂这些基本的概念实在是太过分了，这也暴露了我学习知识的一个问题。<br/><br>言归正传，本文将解答我两个疑惑</p>
+<ul>
+<li>rn的本质是什么？</li>
+<li>和webview的区别是什么？</li>
+</ul>
+<h2 id="rn"><a href="#rn" class="headerlink" title="rn"></a>rn</h2><h3 id="rn的特点"><a href="#rn的特点" class="headerlink" title="rn的特点"></a>rn的特点</h3><h4 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h4><p>rn使用了virtual dom（虚拟dom）,只需编写一套代码，便可以将代码打包成不同平台的APP，极大的提高了开发效率，并且相对全部原声开发的应用来说，维护成本相对很低</p>
+<h4 id="原生体验"><a href="#原生体验" class="headerlink" title="原生体验"></a>原生体验</h4><p>rn提供的组件是对原生API的暴露，虽然我们使用的是js语言编写的代码，实际上是调用了原生的API和原生的UI组件。体验和性能足以媲美原生应用（这句话是我抄的 我不信 哦其他的也是抄的 但是信了）</p>
+<h4 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h4><p>因为rn的产物是bundle文件，其实本质上就是js代码，在app启动的时候就会去服务器上获取bundle文件，我们只需要更新bundle文件，从而使得App不需要重新前往商店下载包就可以版本更新，可以用户无感知，但是APPStore禁止热更新的功能中有调用私有API，篡改原生代码，改变APP的行为</p>
+<h3 id="rn原理"><a href="#rn原理" class="headerlink" title="rn原理"></a>rn原理</h3><h4 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h4><p>JavaScriptCore是JavaScript引擎，通常被叫做虚拟机，专门设计来<code>解释和执行</code>JavaScript代码。在React Native里面，JavaScriptCore负责bundle产出的js代码的解析和执行</p>
+<h4 id="js-engine"><a href="#js-engine" class="headerlink" title="js engine"></a>js engine</h4><p>rn需要一个js的运行环境，因为rn会把应用的js代码编译成js文件(bundle)，rn框架的目标就是解释运行这个js的脚本文件，如果是Native拓展的API，则直接通过bridge调用Native方法，最基础的比如绘制UI界面，映射Virtual DOM到真实的UI组件中 (图片来自掘金)</p>
+<p><img src="/images/react/1.jpeg" alt="1"></p>
+
+
+<ul>
+<li>绿色是我们应用开发的部分，写代码的部分</li>
+<li>蓝色代表公用的跨平台的代码和工具引擎，一般不动</li>
+<li>黄色代表平台相关的bridge代码，做定制化的时候会添加修改代码</li>
+<li>红色代表系统平台的功能，另外红色上面有一个许仙，代表平台所有相关东西都通过bridge隔离开了，红色部分是独立于rn的</li>
+</ul>
+<h4 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h4><p>在rn中，原生端和javascript交互是通过bridge进行的，bridge的作用就是給rn内嵌的js engine提供原生接口的扩展供js调用。所有的本地存储、图片资源访问、图形图像绘制、3d加速、网络访问、震动效果、NFC、原生控件绘制、地图、定位、通知等都是通过bridge封装成js接口以后注入js engine供js调用。<br/><br>理论上，任何原生代码能实现的效果都是可以通过bridge封装成js可以调用的组件和方法，以js模块的形式提供给rn使用</p>
+<h2 id="webview"><a href="#webview" class="headerlink" title="webview"></a>webview</h2><h3 id="什么是webview"><a href="#什么是webview" class="headerlink" title="什么是webview"></a>什么是webview</h3><ul>
+<li>webview，直译网页视图，是一个基于webkit（开源浏览器引擎，被用于Safari）内核的，用于显示网页的空间，具备渲染web页面的功能。</li>
+<li>webview可以内嵌在移动端，实现前端的混合式开发，大多数混合式开发框架都是基于WebView模式进行二次开发的，比如uni-app、hybrid app 等<h3 id="webview的特点"><a href="#webview的特点" class="headerlink" title="webview的特点"></a>webview的特点</h3>轻量 app的内容像网页渲染一般轻量<h4 id="一次开发-多系统适配"><a href="#一次开发-多系统适配" class="headerlink" title="一次开发 多系统适配"></a>一次开发 多系统适配</h4>一套代码适应安卓和ios系统<h4 id="web更新为线上即时更新，不需下载补丁包"><a href="#web更新为线上即时更新，不需下载补丁包" class="headerlink" title="web更新为线上即时更新，不需下载补丁包"></a>web更新为线上即时更新，不需下载补丁包</h4>不需要下载补丁包，就可以无痛无感更新</li>
+</ul>
+<h3 id="和rn到底有什么区别如何选择"><a href="#和rn到底有什么区别如何选择" class="headerlink" title="和rn到底有什么区别如何选择"></a>和rn到底有什么区别如何选择</h3><ul>
+<li>rn目前主要的功能提供<code>高效且基础</code>的功能， webview添加一些<code>性能要求不高但动态化要求高的能力</code></li>
+</ul>
+<p><img src="/images/react/2.jpeg" alt="2"></p>
+
+
+<h3 id="webview一些注意点"><a href="#webview一些注意点" class="headerlink" title="webview一些注意点"></a>webview一些注意点</h3><ul>
+<li>在内嵌的webview中应该限制允许打开的webview的域名，并设置进行访问的白名单。或者当用户打开外部链接前給用户强烈而明显的提示</li>
+<li>提供客户端的动态能力，或者提高webview的性能，都是提升app功能覆盖的方式</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>react-native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react rerender</title>
+    <url>/2022/04/22/react-5/</url>
+    <content><![CDATA[<h2 id="react-rerender"><a href="#react-rerender" class="headerlink" title="react rerender"></a>react rerender</h2><p>3 reasons caused re-rendering </p>
+<h3 id="Update-in-State"><a href="#Update-in-State" class="headerlink" title="Update in State"></a>Update in State</h3><ul>
+<li>prop<br>prop changed -&gt; state changed</li>
+<li>setState</li>
+</ul>
+<h3 id="Update-in-Prop"><a href="#Update-in-Prop" class="headerlink" title="Update in Prop"></a>Update in Prop</h3><p>prop changes -&gt; setState changes</p>
+<h3 id="Re-rendering-of-parent-Component"><a href="#Re-rendering-of-parent-Component" class="headerlink" title="Re-rendering of parent Component"></a>Re-rendering of parent Component</h3><p>when re-rendering function is called in the parent component, all the subsequent component will rerender, regardless of whether their props are changed or not</p>
+<h2 id="render-is-not-immediately"><a href="#render-is-not-immediately" class="headerlink" title="render is not immediately"></a>render is not immediately</h2><p>React schedule the render, but that is not immediately (sync)</p>
+<h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><ul>
+<li><p>You can use the React.memo (hook) for performance optimization</p>
+</li>
+<li><p>React.memo will memorize the latest version, only the props changed, the re-rendering will be called</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react scheduler</title>
+    <url>/2022/04/25/react-6/</url>
+    <content><![CDATA[<h2 id="react-runtime-environment"><a href="#react-runtime-environment" class="headerlink" title="react runtime environment"></a>react runtime environment</h2><p><img src="/images/react/react-runtime-environment.png" alt="react-runtime-environment"></p>
+
+<h3 id="requestHostCallback"><a href="#requestHostCallback" class="headerlink" title="requestHostCallback"></a>requestHostCallback</h3><h4 id="reqestIdCallback"><a href="#reqestIdCallback" class="headerlink" title="reqestIdCallback"></a>reqestIdCallback</h4><ul>
+<li><code>requestIdCallback</code> relys on <code>requestAnimationFrame</code>, <code>requestAnimationFrame</code> gussing the next vsync </li>
+</ul>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><ul>
+<li><code>Promise</code> is the microtasks ! The microtasks are continuously executed unitl the microtasks queue on the event loop is empty, which may be blocked by React if has the high-pri interaction.</li>
+</ul>
+<h4 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h4><ul>
+<li>the <code>4ms</code> clamping cannot be accepted</li>
+</ul>
+<h4 id="Message-Channel"><a href="#Message-Channel" class="headerlink" title="Message Channel"></a>Message Channel</h4><ul>
+<li>may intensify competition for other tasks in the brower ❓</li>
+<li>Message Channel posts a message and performs a small amount of work <code>5ms</code> ,regardless of where it might be in the vsync cycle (not rely on the vsync cycle)</li>
+<li>at the end of event, if there’s work left over, post anonther message evnet</li>
+</ul>
+<h3 id="Distinguish-between-node-IE-and-jsdom"><a href="#Distinguish-between-node-IE-and-jsdom" class="headerlink" title="Distinguish between (node , IE) and jsdom"></a>Distinguish between (node , IE) and jsdom</h3><ul>
+<li>Since node.js 15，there is a gloabl <code>MessageChannel</code>object, which prevents node event loop from exiting</li>
+</ul>
+<h3 id="Use-setImmediate-in-Node-js-amp-IE"><a href="#Use-setImmediate-in-Node-js-amp-IE" class="headerlink" title="Use setImmediate in Node js &amp; IE"></a>Use setImmediate in Node js &amp; IE</h3>]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react context</title>
+    <url>/2022/05/06/react-7/</url>
+    <content><![CDATA[<p><img src="/images/react/react-context.png" alt="react-context"></p>
+
+
+<h2 id="context-is-broadcast"><a href="#context-is-broadcast" class="headerlink" title="context is broadcast"></a>context is broadcast</h2><ul>
+<li>useEffect needs props pass through level by level</li>
+<li>context can pass in different nesting level (‘global’)</li>
+</ul>
+<h2 id="createContext-class-useContext-hook"><a href="#createContext-class-useContext-hook" class="headerlink" title="createContext(class) / useContext (hook)"></a>createContext(class) / useContext (hook)</h2><blockquote>
+<p>defaultValue: ONLY used when component doesn’t match any provider</p>
+</blockquote>
+<ul>
+<li>if passed <code>undefined</code>, not cause use <code>defaultValue</code></li>
+</ul>
+<h2 id="Provider-provide-the-context-value"><a href="#Provider-provide-the-context-value" class="headerlink" title="Provider: provide the context value"></a>Provider: provide the context value</h2><p><code>&lt;MyContext.Provider value=&#123;aaa&#125;&gt;</code></p>
+<ul>
+<li><p>All consumers that are descendants of the Provider will re-render whenever the Provider’s value changes</p>
+</li>
+<li><p>the propagation from Provider to its descendant consumers is not subject to the <code>shouldComponentUpdate</code> method</p>
+</li>
+<li><p>the consumer is updated even when an ancestor component skips an update</p>
+</li>
+<li><p>use <code>Object.is</code> compare new and old</p>
+</li>
+</ul>
+<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h2><ul>
+<li>requeire a function as child</li>
+<li>return a React Node</li>
+<li>if there is no Provider, use <code>defaultValue</code></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react lifecycle</title>
+    <url>/2022/06/08/react-8/</url>
+    <content><![CDATA[<p><img src="/images/react/react-lifecycle.png" alt="react-lifecycle"></p>
+
+
+<h2 id="react-lifecycle"><a href="#react-lifecycle" class="headerlink" title="react lifecycle"></a>react lifecycle</h2><p>Each React component has a life cycle, which consists of three phases:</p>
+<ul>
+<li>mounting: that is inserting elements into the DOM</li>
+<li>updating: which invovles methods for updating components in the DOM</li>
+<li>unmounting: that is removing a component from the DOM</li>
+</ul>
+<p>&lt;other lifecycle are deprecated in React 17&gt;</p>
+<h2 id="class-based-and-functional-component"><a href="#class-based-and-functional-component" class="headerlink" title="class-based and functional component"></a>class-based and functional component</h2><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>class-based component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidUpdate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>useEffect </p>
+<ul>
+<li>the dependence array is a <code>[]</code>, which means only evaluate the hook on mount</li>
+<li>the dependence array is <code>undefined</code>, which will evaluate every re-render</li>
+</ul>
+<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>functional component</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">       <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><table>
+<thead>
+<tr>
+<th>diff</th>
+<th>functional component</th>
+<th>class-based component</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flexibility</td>
+<td>functional will be more flexbility</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>allow the developer to decide how tightly or loosely coupled the lifecycle methods</td>
+<td>any setup that was donw in <code>componentDidMount</code> would have to make values available to <code>componentWillUnmount</code> in order to clean up</td>
+</tr>
+<tr>
+<td>-</td>
+<td>there is no need to do that since the mounting and unmounting logic is enclosed inside the same function scope/ but rig need to have a separation can opt to use two separate hooks</td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ts 体操</title>
     <url>/2022/01/12/ts-1/</url>
     <content><![CDATA[<h2 id="2-获取函数返回类型"><a href="#2-获取函数返回类型" class="headerlink" title="2 - 获取函数返回类型"></a>2 - 获取函数返回类型</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>利用infer的类型推导，构造出函数和他的返回值</p>
@@ -211,17 +452,49 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode 986 区间列表的交集</title>
-    <url>/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/</url>
-    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a href="https://leetcode-cn.com/problems/interval-list-intersections/">区间列表的交集</a></p>
-<p>刚开始走了一点弯路，实际上 left，right 都很好理解，最关键的是谁在递增，递增条件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">firstList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">secondList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intervalIntersection = <span class="function"><span class="keyword">function</span> (<span class="params">firstList, secondList</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">    j = <span class="number">0</span>,</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (i &lt; firstList.length &amp;&amp; j &lt; secondList.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="built_in">Math</span>.max(firstList[i][<span class="number">0</span>], secondList[j][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">let</span> right = <span class="built_in">Math</span>.min(firstList[i][<span class="number">1</span>], secondList[j][<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (left &lt;= right) &#123;</span><br><span class="line">      res.push([left, right]);</span><br><span class="line">    &#125;</span><br><span class="line">    firstList[i][<span class="number">1</span>] &gt; secondList[j][<span class="number">1</span>] ? j++ : i++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <title>typescript 盲区汇总</title>
+    <url>/2022/05/30/ts-2/</url>
+    <content><![CDATA[<h2 id="in-operator-narrow-type"><a href="#in-operator-narrow-type" class="headerlink" title="in operator: narrow type"></a><code>in</code> operator: narrow type</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">logPerson</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> additionalInformation: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&#x27;role&#x27;</span> <span class="keyword">in</span> person) &#123;</span><br><span class="line">        additionalInformation = person.role;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        additionalInformation = person.occupation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">` - <span class="subst">$&#123;person.name&#125;</span>, <span class="subst">$&#123;person.age&#125;</span>, <span class="subst">$&#123;additionalInformation&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&#39;role&#39; in person</code> (return true)will let the type narrow to the type who has an optional or requried property <code>role</code></li>
+<li>but return false will let the type narrow to the type who has a optional or missing property <code>role</code></li>
+</ul>
+<h2 id="is-operator-specify-type"><a href="#is-operator-specify-type" class="headerlink" title="is operator: specify type"></a><code>is</code> operator: specify type</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isAdmin</span>(<span class="params">person: Person</span>): <span class="title">person</span> <span class="title">is</span> <span class="title">Admin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> person.type === <span class="string">&#x27;admin&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>you can use the <code>is</code> specify the return value types</li>
+</ul>
+<h2 id="function-overloads-functions-can-be-called-in-different-ways"><a href="#function-overloads-functions-can-be-called-in-different-ways" class="headerlink" title="function overloads: functions can be called in different ways"></a>function overloads: functions can be called in different ways</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// type Person = User | Admin</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;user&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">User</span>[]</span></span><br><span class="line"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;admin&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">Admin</span>[]  </span></span></span><br><span class="line"><span class="function"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">persons: Person[], personType: <span class="built_in">string</span>, criteria: Partial&lt;Person&gt;</span>): <span class="title">Person</span>[] </span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="function">    <span class="title">return</span> <span class="title">persons</span></span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; person.<span class="keyword">type</span> === personType</span>)</span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">let</span> criteriaKeys = <span class="built_in">Object</span>.keys(criteria) <span class="keyword">as</span> (keyof Person)[];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">return</span> criteriaKeys.every((fieldName) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">                <span class="keyword">return</span> person[fieldName] === criteria[fieldName];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            &#125;);</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">        &#125;</span>)</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/986.png" alt="986"></p>
+<ul>
+<li>Always prefer parameters with union types instead of overloads when possible</li>
+</ul>
+<h2 id="Object-object"><a href="#Object-object" class="headerlink" title="Object / object / {}"></a>Object / object / {}</h2><p><a href="https://cloud.tencent.com/developer/article/1610691">https://cloud.tencent.com/developer/article/1610691</a></p>
+<h3 id="Object-所有Object类的实例的类型"><a href="#Object-所有Object类的实例的类型" class="headerlink" title="Object - 所有Object类的实例的类型"></a>Object - 所有Object类的实例的类型</h3><p>定义方式：</p>
+<ul>
+<li>Object 接口定义了Object.prototype原型对象上的属性</li>
+<li>Object Constructor 接口定义了Object类的属性</li>
+</ul>
+<h3 id="object-非基本类型"><a href="#object-非基本类型" class="headerlink" title="object - 非基本类型"></a>object - 非基本类型</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> Primitive = <span class="built_in">string</span> | <span class="built_in">boolean</span> | <span class="built_in">number</span> | symble | bigint | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NonPrimitive = <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="空对象"><a href="#空对象" class="headerlink" title="{} - 空对象"></a>{} - 空对象</h3><p>描述了一个没有成员的对象</p>
+<h2 id="Union-to-intersection-type"><a href="#Union-to-intersection-type" class="headerlink" title="Union to intersection type"></a>Union to intersection type</h2><p><a href="https://fettblog.eu/typescript-union-to-intersection/">https://fettblog.eu/typescript-union-to-intersection/</a></p>
 ]]></content>
       <tags>
-        <tag>双指针</tag>
+        <tag>typescript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>位运算 基本知识</title>
+    <url>/2022/06/08/%E4%BD%8D%E8%BF%90%E7%AE%97-1/</url>
+    <content><![CDATA[<h1 id="和位运算说hihi"><a href="#和位运算说hihi" class="headerlink" title="和位运算说hihi"></a>和位运算说hihi</h1><p><a href="https://www.zhihu.com/question/38206659">https://www.zhihu.com/question/38206659</a></p>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="amp-与运算"><a href="#amp-与运算" class="headerlink" title="&amp; 与运算"></a>&amp; 与运算</h3><p>两【个位】都是1，结果才为1，否则为0</p>
+<h3 id="或运算"><a href="#或运算" class="headerlink" title="| 或运算"></a>| 或运算</h3><p>两【个位】都是0，结果才为0，否则为1</p>
+<h3 id="异或运算"><a href="#异或运算" class="headerlink" title="^ 异或运算"></a>^ 异或运算</h3><p>两【个位】相同则为0，不同则为1</p>
+<h3 id="～取反运算"><a href="#～取反运算" class="headerlink" title="～取反运算"></a>～取反运算</h3><p> 0 -&gt; 1 ,1 -&gt; 0</p>
+<h3 id="lt-lt-左移运算"><a href="#lt-lt-左移运算" class="headerlink" title="&lt;&lt; 左移运算"></a>&lt;&lt; 左移运算</h3><p>向左进行移位操作，高位丢弃，低位补0</p>
+]]></content>
+      <tags>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
@@ -233,6 +506,48 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">height</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxArea = <span class="function"><span class="keyword">function</span> (<span class="params">height</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> left = <span class="number">0</span>,</span><br><span class="line">    right = height.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">let</span> tempRes = <span class="built_in">Math</span>.min(height[left], height[right]) * (right - left);</span><br><span class="line">    res = <span class="built_in">Math</span>.max(res, tempRes);</span><br><span class="line">    height[right] &gt; height[left] ? left++ : right--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>最后贴贴我的通过图片 ✅<br><img src="/images/leetcode/11.png" alt="11"></p>
+
+]]></content>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 373 查找和最小的 K 对数字</title>
+    <url>/2022/01/14/%E5%A0%86-1/</url>
+    <content><![CDATA[<h2 id="查找和最小的-K-对数字"><a href="#查找和最小的-K-对数字" class="headerlink" title="查找和最小的 K 对数字"></a><a href="https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/">查找和最小的 K 对数字</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>说实话 不看tag 我根本不知道这是一道堆的题<br>我的方法不是很优，但是也没有那么暴力，如果以后有机会的话优化下吧</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> kSmallestPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [], maxSum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nums2.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(res.length &lt; k) &#123;</span><br><span class="line">                res.push([nums1[i],nums2[j]])</span><br><span class="line">                maxSum = <span class="built_in">Math</span>.max(maxSum, nums2[j] + nums1[i])</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(maxSum &gt; nums1[i]+ nums2[j])&#123;</span><br><span class="line">                    res.push([nums1[i],nums2[j]])</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> (a[<span class="number">0</span>] + a[<span class="number">1</span>]) - (b[<span class="number">0</span>] + b[<span class="number">1</span>])).slice(<span class="number">0</span>,k)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/373.png" alt="373"></p>
+]]></content>
+      <tags>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态机dp</title>
+    <url>/2022/06/30/%E5%8A%A8%E6%80%81%E6%9C%BAdp/</url>
+    <content><![CDATA[<h2 id="粉刷房子"><a href="#粉刷房子" class="headerlink" title="粉刷房子"></a><a href="https://leetcode.cn/problems/JEj789/">粉刷房子</a></h2><p>💡：每一个都和前一个有关，记住这一点就足够了</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 粗糙版</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(costs.length).fill(<span class="number">0</span>)</span><br><span class="line">        .map(<span class="function">(<span class="params">item</span>) =&gt;</span> [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp[<span class="number">0</span>] = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp[dp.length - <span class="number">1</span>])</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>💡： 其实如果只关心上一层的状态，则不需要关心其他层，那dp可以是一个一维数组</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//调整下</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dp = [<span class="number">0</span> , <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> temp = [...dp]</span><br><span class="line">            dp[<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">1</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="最长定差子序列"><a href="#最长定差子序列" class="headerlink" title="最长定差子序列"></a><a href="https://leetcode.cn/problems/longest-arithmetic-subsequence-of-given-difference/submissions/">最长定差子序列</a></h2><p>💡：不一定是数组！也有可能是Map 是Set， 只需要记住，只和前一个的状态有关 （这里的前一个是前一个定差子序列）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">arr</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">difference</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> longestSubsequence = <span class="function"><span class="keyword">function</span>(<span class="params">arr, difference</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.get(arr[i] - difference)) &#123;</span><br><span class="line">            <span class="keyword">const</span> count = map.get(arr[i] - difference) + <span class="number">1</span></span><br><span class="line">            map.set(arr[i],count)</span><br><span class="line">            res = <span class="built_in">Math</span>.max(res,count )</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(arr[i], <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>动态机dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 986 区间列表的交集</title>
+    <url>/2021/12/27/%E5%8F%8C%E6%8C%87%E9%92%88-1/</url>
+    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><a href="https://leetcode-cn.com/problems/interval-list-intersections/">区间列表的交集</a></p>
+<p>刚开始走了一点弯路，实际上 left，right 都很好理解，最关键的是谁在递增，递增条件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">firstList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">secondList</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> intervalIntersection = <span class="function"><span class="keyword">function</span> (<span class="params">firstList, secondList</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>,</span><br><span class="line">    j = <span class="number">0</span>,</span><br><span class="line">    res = [];</span><br><span class="line">  <span class="keyword">while</span> (i &lt; firstList.length &amp;&amp; j &lt; secondList.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="built_in">Math</span>.max(firstList[i][<span class="number">0</span>], secondList[j][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">let</span> right = <span class="built_in">Math</span>.min(firstList[i][<span class="number">1</span>], secondList[j][<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (left &lt;= right) &#123;</span><br><span class="line">      res.push([left, right]);</span><br><span class="line">    &#125;</span><br><span class="line">    firstList[i][<span class="number">1</span>] &gt; secondList[j][<span class="number">1</span>] ? j++ : i++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/986.png" alt="986"></p>
 
 ]]></content>
       <tags>
@@ -255,16 +570,21 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode 373 查找和最小的 K 对数字</title>
-    <url>/2022/01/14/%E5%A0%86-1/</url>
-    <content><![CDATA[<h2 id="查找和最小的-K-对数字"><a href="#查找和最小的-K-对数字" class="headerlink" title="查找和最小的 K 对数字"></a><a href="https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/">查找和最小的 K 对数字</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>说实话 不看tag 我根本不知道这是一道堆的题<br>我的方法不是很优，但是也没有那么暴力，如果以后有机会的话优化下吧</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[][]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> kSmallestPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums1, nums2, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [], maxSum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums1.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nums2.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(res.length &lt; k) &#123;</span><br><span class="line">                res.push([nums1[i],nums2[j]])</span><br><span class="line">                maxSum = <span class="built_in">Math</span>.max(maxSum, nums2[j] + nums1[i])</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(maxSum &gt; nums1[i]+ nums2[j])&#123;</span><br><span class="line">                    res.push([nums1[i],nums2[j]])</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> (a[<span class="number">0</span>] + a[<span class="number">1</span>]) - (b[<span class="number">0</span>] + b[<span class="number">1</span>])).slice(<span class="number">0</span>,k)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    <title>层序遍历系列题</title>
+    <url>/2022/06/27/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E7%B3%BB%E5%88%97%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="二叉树层序遍历的关键"><a href="#二叉树层序遍历的关键" class="headerlink" title="二叉树层序遍历的关键"></a>二叉树层序遍历的关键</h1><p><code>list.flatMap(node =&gt; [node.left, node.right]).filter(Boolean)</code></p>
+<h2 id="找到左下角的值"><a href="#找到左下角的值" class="headerlink" title="找到左下角的值"></a><a href="https://leetcode.cn/problems/find-bottom-left-tree-value/">找到左下角的值</a></h2><p>层序遍历 冲到最后一层</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!root) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> res = root.val</span><br><span class="line">  <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!list.length)&#123;</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    res = list[<span class="number">0</span>].val</span><br><span class="line">    <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">    dfs(nextLevel)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  dfs([root])</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="在每个树行中找最大值"><a href="#在每个树行中找最大值" class="headerlink" title="在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">在每个树行中找最大值</a></h2><p>层序遍历， 每层寻找最大值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">       <span class="keyword">return</span> []</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        res.push(<span class="built_in">Math</span>.max(...(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))))</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root])</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/373.png" alt="373"></p>
-]]></content>
+<h2 id="二叉树的锯齿形层序遍历"><a href="#二叉树的锯齿形层序遍历" class="headerlink" title="二叉树的锯齿形层序遍历"></a><a href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/submissions/">二叉树的锯齿形层序遍历</a></h2><p>层序遍历 左右倒 注意reverse()会改变原数组</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list, time</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(time % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            res.push(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> tempList = [...list]</span><br><span class="line">            res.push(tempList.reverse().map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel,time + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root], <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>堆</tag>
+        <tag>dfs</tag>
+        <tag>二叉树</tag>
+        <tag>层序遍历</tag>
       </tags>
   </entry>
   <entry>
@@ -323,24 +643,24 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode 747 至少是其他数字两倍的最大数</title>
-    <url>/2022/01/13/%E6%A8%A1%E6%8B%9F-2/</url>
-    <content><![CDATA[<h2 id="至少是其他数字两倍的最大数"><a href="#至少是其他数字两倍的最大数" class="headerlink" title="至少是其他数字两倍的最大数"></a><a href="https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/">至少是其他数字两倍的最大数</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实思路有很多，我选择了最懒惰的一种，Math.floor(max / 2)去做比较，</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> dominantIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> max = <span class="built_in">Math</span>.max(...nums),tempNum = <span class="built_in">Math</span>.floor(max / <span class="number">2</span>), i = <span class="number">0</span>,index = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">if</span>(max === nums[i]) &#123;</span><br><span class="line">            index = i</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tempNum &lt; nums[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/leetcode/747.png" alt="747"></p>
-]]></content>
-      <tags>
-        <tag>模拟</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode 1716 计算力扣银行的钱</title>
     <url>/2022/01/15/%E6%A8%A1%E6%8B%9F-3/</url>
     <content><![CDATA[<h2 id="计算力扣银行的钱"><a href="#计算力扣银行的钱" class="headerlink" title="计算力扣银行的钱"></a><a href="https://leetcode-cn.com/problems/calculate-money-in-leetcode-bank/">计算力扣银行的钱</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我恨数学！！！！</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> totalMoney = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = <span class="built_in">Math</span>.floor(n / <span class="number">7</span>), y = n % <span class="number">7</span></span><br><span class="line">    <span class="keyword">return</span> x * (x + <span class="number">7</span>) * <span class="number">7</span> / <span class="number">2</span> + (y + <span class="number">1</span>) * y / <span class="number">2</span> + x * y</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1716.png" alt="1716"></p>
+]]></content>
+      <tags>
+        <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 747 至少是其他数字两倍的最大数</title>
+    <url>/2022/01/13/%E6%A8%A1%E6%8B%9F-2/</url>
+    <content><![CDATA[<h2 id="至少是其他数字两倍的最大数"><a href="#至少是其他数字两倍的最大数" class="headerlink" title="至少是其他数字两倍的最大数"></a><a href="https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/">至少是其他数字两倍的最大数</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实思路有很多，我选择了最懒惰的一种，Math.floor(max / 2)去做比较，</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> dominantIndex = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> max = <span class="built_in">Math</span>.max(...nums),tempNum = <span class="built_in">Math</span>.floor(max / <span class="number">2</span>), i = <span class="number">0</span>,index = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; nums.length) &#123;</span><br><span class="line">        <span class="keyword">if</span>(max === nums[i]) &#123;</span><br><span class="line">            index = i</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(tempNum &lt; nums[i]) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/leetcode/747.png" alt="747"></p>
 ]]></content>
       <tags>
         <tag>模拟</tag>
@@ -412,6 +732,11 @@
       </tags>
   </entry>
   <entry>
+    <title>网络-1</title>
+    <url>/2022/02/26/%E7%BD%91%E7%BB%9C-1/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>leetcode 334 递增的三元子序列</title>
     <url>/2022/01/12/%E8%B4%AA%E5%BF%83-3/</url>
     <content><![CDATA[<h2 id="递增的三元子序列"><a href="#递增的三元子序列" class="headerlink" title="递增的三元子序列"></a><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">递增的三元子序列</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>其实做到这道题的时候，我还没有完全理解什么是贪心<br><br>但是这道题的思路就是，找到三个递增的，–&gt; 找到两组 两个递增的</p>
@@ -428,320 +753,6 @@
 ]]></content>
       <tags>
         <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>viewport和1px</title>
-    <url>/2022/02/04/css-2/</url>
-    <content><![CDATA[<h2 id="viewport和1px"><a href="#viewport和1px" class="headerlink" title="viewport和1px"></a>viewport和1px</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>高清屏中——移动端的1px很粗，无论是h5还是rn,都需要重新进行适配</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
-<li>DPR(devicePIxelRatio)设备像素比，它是默认缩放为100%的情况下，设备像素和css像素的比值。简单的说，这应该告诉浏览器应该使用多少个屏幕的实际像素来绘制单个css像素</li>
-<li>用户缩放。用户把页面放大一倍，css中1px所代表的物理像素也会增加一倍。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">value = <span class="built_in">window</span>.devicePixelRatio;</span><br></pre></td></tr></table></figure>
-
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>如果1px是2px，那么0.5px不就是1px？？<br/><br>事实不一定，Retina屏浏览器很有可能不认识0.5px的边框，会变成0px （ios 7 及以前版本，安卓设备表现）<br/><br>我们可以通过检测浏览器能不能处理0.5px，如果处理不了，就给<html>元素加一个class</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (window.devicePixelRatio &amp;&amp; devicePixelRatio &gt;= 2) &#123;</span><br><span class="line">  var testElem = document.createElement(&#x27;div&#x27;);</span><br><span class="line">  testElem.style.border = &#x27;.5px solid transparent&#x27;;</span><br><span class="line">  document.body.appendChild(testElem);</span><br><span class="line">  if (testElem.offsetHeight == 1)</span><br><span class="line">  &#123;</span><br><span class="line">    document.querySelector(&#x27;html&#x27;).classList.add(&#x27;hairlines&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">  document.body.removeChild(testElem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  border: 1px solid #bbb;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">.hairlines div &#123;</span><br><span class="line">  border-width: 0.5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>react-native &amp;&amp; webview &amp;&amp; 端</title>
-    <url>/2022/02/04/react-4/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>进了新公司一个多月，接触rn也有小半个月了，还没有搞懂这些基本的概念实在是太过分了，这也暴露了我学习知识的一个问题。<br/><br>言归正传，本文将解答我两个疑惑</p>
-<ul>
-<li>rn的本质是什么？</li>
-<li>和webview的区别是什么？</li>
-</ul>
-<h2 id="rn"><a href="#rn" class="headerlink" title="rn"></a>rn</h2><h3 id="rn的特点"><a href="#rn的特点" class="headerlink" title="rn的特点"></a>rn的特点</h3><h4 id="跨平台"><a href="#跨平台" class="headerlink" title="跨平台"></a>跨平台</h4><p>rn使用了virtual dom（虚拟dom）,只需编写一套代码，便可以将代码打包成不同平台的APP，极大的提高了开发效率，并且相对全部原声开发的应用来说，维护成本相对很低</p>
-<h4 id="原生体验"><a href="#原生体验" class="headerlink" title="原生体验"></a>原生体验</h4><p>rn提供的组件是对原生API的暴露，虽然我们使用的是js语言编写的代码，实际上是调用了原生的API和原生的UI组件。体验和性能足以媲美原生应用（这句话是我抄的 我不信 哦其他的也是抄的 但是信了）</p>
-<h4 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h4><p>因为rn的产物是bundle文件，其实本质上就是js代码，在app启动的时候就会去服务器上获取bundle文件，我们只需要更新bundle文件，从而使得App不需要重新前往商店下载包就可以版本更新，可以用户无感知，但是APPStore禁止热更新的功能中有调用私有API，篡改原生代码，改变APP的行为</p>
-<h3 id="rn原理"><a href="#rn原理" class="headerlink" title="rn原理"></a>rn原理</h3><h4 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h4><p>JavaScriptCore是JavaScript引擎，通常被叫做虚拟机，专门设计来<code>解释和执行</code>JavaScript代码。在React Native里面，JavaScriptCore负责bundle产出的js代码的解析和执行</p>
-<h4 id="js-engine"><a href="#js-engine" class="headerlink" title="js engine"></a>js engine</h4><p>rn需要一个js的运行环境，因为rn会把应用的js代码编译成js文件(bundle)，rn框架的目标就是解释运行这个js的脚本文件，如果是Native拓展的API，则直接通过bridge调用Native方法，最基础的比如绘制UI界面，映射Virtual DOM到真实的UI组件中 (图片来自掘金)</p>
-<p><img src="/images/react/1.jpeg" alt="1"></p>
-
-
-<ul>
-<li>绿色是我们应用开发的部分，写代码的部分</li>
-<li>蓝色代表公用的跨平台的代码和工具引擎，一般不动</li>
-<li>黄色代表平台相关的bridge代码，做定制化的时候会添加修改代码</li>
-<li>红色代表系统平台的功能，另外红色上面有一个许仙，代表平台所有相关东西都通过bridge隔离开了，红色部分是独立于rn的</li>
-</ul>
-<h4 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h4><p>在rn中，原生端和javascript交互是通过bridge进行的，bridge的作用就是給rn内嵌的js engine提供原生接口的扩展供js调用。所有的本地存储、图片资源访问、图形图像绘制、3d加速、网络访问、震动效果、NFC、原生控件绘制、地图、定位、通知等都是通过bridge封装成js接口以后注入js engine供js调用。<br/><br>理论上，任何原生代码能实现的效果都是可以通过bridge封装成js可以调用的组件和方法，以js模块的形式提供给rn使用</p>
-<h2 id="webview"><a href="#webview" class="headerlink" title="webview"></a>webview</h2><h3 id="什么是webview"><a href="#什么是webview" class="headerlink" title="什么是webview"></a>什么是webview</h3><ul>
-<li>webview，直译网页视图，是一个基于webkit（开源浏览器引擎，被用于Safari）内核的，用于显示网页的空间，具备渲染web页面的功能。</li>
-<li>webview可以内嵌在移动端，实现前端的混合式开发，大多数混合式开发框架都是基于WebView模式进行二次开发的，比如uni-app、hybrid app 等<h3 id="webview的特点"><a href="#webview的特点" class="headerlink" title="webview的特点"></a>webview的特点</h3>轻量 app的内容像网页渲染一般轻量<h4 id="一次开发-多系统适配"><a href="#一次开发-多系统适配" class="headerlink" title="一次开发 多系统适配"></a>一次开发 多系统适配</h4>一套代码适应安卓和ios系统<h4 id="web更新为线上即时更新，不需下载补丁包"><a href="#web更新为线上即时更新，不需下载补丁包" class="headerlink" title="web更新为线上即时更新，不需下载补丁包"></a>web更新为线上即时更新，不需下载补丁包</h4>不需要下载补丁包，就可以无痛无感更新</li>
-</ul>
-<h3 id="和rn到底有什么区别如何选择"><a href="#和rn到底有什么区别如何选择" class="headerlink" title="和rn到底有什么区别如何选择"></a>和rn到底有什么区别如何选择</h3><ul>
-<li>rn目前主要的功能提供<code>高效且基础</code>的功能， webview添加一些<code>性能要求不高但动态化要求高的能力</code></li>
-</ul>
-<p><img src="/images/react/2.jpeg" alt="2"></p>
-
-
-<h3 id="webview一些注意点"><a href="#webview一些注意点" class="headerlink" title="webview一些注意点"></a>webview一些注意点</h3><ul>
-<li>在内嵌的webview中应该限制允许打开的webview的域名，并设置进行访问的白名单。或者当用户打开外部链接前給用户强烈而明显的提示</li>
-<li>提供客户端的动态能力，或者提高webview的性能，都是提升app功能覆盖的方式</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>react-native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>react rerender</title>
-    <url>/2022/04/22/react-5/</url>
-    <content><![CDATA[<h2 id="react-rerender"><a href="#react-rerender" class="headerlink" title="react rerender"></a>react rerender</h2><p>3 reasons caused re-rendering </p>
-<h3 id="Update-in-State"><a href="#Update-in-State" class="headerlink" title="Update in State"></a>Update in State</h3><ul>
-<li>prop<br>prop changed -&gt; state changed</li>
-<li>setState</li>
-</ul>
-<h3 id="Update-in-Prop"><a href="#Update-in-Prop" class="headerlink" title="Update in Prop"></a>Update in Prop</h3><p>prop changes -&gt; setState changes</p>
-<h3 id="Re-rendering-of-parent-Component"><a href="#Re-rendering-of-parent-Component" class="headerlink" title="Re-rendering of parent Component"></a>Re-rendering of parent Component</h3><p>when re-rendering function is called in the parent component, all the subsequent component will rerender, regardless of whether their props are changed or not</p>
-<h2 id="render-is-not-immediately"><a href="#render-is-not-immediately" class="headerlink" title="render is not immediately"></a>render is not immediately</h2><p>React schedule the render, but that is not immediately (sync)</p>
-<h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><ul>
-<li><p>You can use the React.memo (hook) for performance optimization</p>
-</li>
-<li><p>React.memo will memorize the latest version, only the props changed, the re-rendering will be called</p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网络-1</title>
-    <url>/2022/02/26/%E7%BD%91%E7%BB%9C-1/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>react scheduler</title>
-    <url>/2022/04/25/react-6/</url>
-    <content><![CDATA[<h2 id="react-runtime-environment"><a href="#react-runtime-environment" class="headerlink" title="react runtime environment"></a>react runtime environment</h2><p><img src="/images/react/react-runtime-environment.png" alt="react-runtime-environment"></p>
-
-<h3 id="requestHostCallback"><a href="#requestHostCallback" class="headerlink" title="requestHostCallback"></a>requestHostCallback</h3><h4 id="reqestIdCallback"><a href="#reqestIdCallback" class="headerlink" title="reqestIdCallback"></a>reqestIdCallback</h4><ul>
-<li><code>requestIdCallback</code> relys on <code>requestAnimationFrame</code>, <code>requestAnimationFrame</code> gussing the next vsync </li>
-</ul>
-<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><ul>
-<li><code>Promise</code> is the microtasks ! The microtasks are continuously executed unitl the microtasks queue on the event loop is empty, which may be blocked by React if has the high-pri interaction.</li>
-</ul>
-<h4 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h4><ul>
-<li>the <code>4ms</code> clamping cannot be accepted</li>
-</ul>
-<h4 id="Message-Channel"><a href="#Message-Channel" class="headerlink" title="Message Channel"></a>Message Channel</h4><ul>
-<li>may intensify competition for other tasks in the brower ❓</li>
-<li>Message Channel posts a message and performs a small amount of work <code>5ms</code> ,regardless of where it might be in the vsync cycle (not rely on the vsync cycle)</li>
-<li>at the end of event, if there’s work left over, post anonther message evnet</li>
-</ul>
-<h3 id="Distinguish-between-node-IE-and-jsdom"><a href="#Distinguish-between-node-IE-and-jsdom" class="headerlink" title="Distinguish between (node , IE) and jsdom"></a>Distinguish between (node , IE) and jsdom</h3><ul>
-<li>Since node.js 15，there is a gloabl <code>MessageChannel</code>object, which prevents node event loop from exiting</li>
-</ul>
-<h3 id="Use-setImmediate-in-Node-js-amp-IE"><a href="#Use-setImmediate-in-Node-js-amp-IE" class="headerlink" title="Use setImmediate in Node js &amp; IE"></a>Use setImmediate in Node js &amp; IE</h3>]]></content>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>react context</title>
-    <url>/2022/05/06/react-7/</url>
-    <content><![CDATA[<p><img src="/images/react/react-context.png" alt="react-context"></p>
-
-
-<h2 id="context-is-broadcast"><a href="#context-is-broadcast" class="headerlink" title="context is broadcast"></a>context is broadcast</h2><ul>
-<li>useEffect needs props pass through level by level</li>
-<li>context can pass in different nesting level (‘global’)</li>
-</ul>
-<h2 id="createContext-class-useContext-hook"><a href="#createContext-class-useContext-hook" class="headerlink" title="createContext(class) / useContext (hook)"></a>createContext(class) / useContext (hook)</h2><blockquote>
-<p>defaultValue: ONLY used when component doesn’t match any provider</p>
-</blockquote>
-<ul>
-<li>if passed <code>undefined</code>, not cause use <code>defaultValue</code></li>
-</ul>
-<h2 id="Provider-provide-the-context-value"><a href="#Provider-provide-the-context-value" class="headerlink" title="Provider: provide the context value"></a>Provider: provide the context value</h2><p><code>&lt;MyContext.Provider value=&#123;aaa&#125;&gt;</code></p>
-<ul>
-<li><p>All consumers that are descendants of the Provider will re-render whenever the Provider’s value changes</p>
-</li>
-<li><p>the propagation from Provider to its descendant consumers is not subject to the <code>shouldComponentUpdate</code> method</p>
-</li>
-<li><p>the consumer is updated even when an ancestor component skips an update</p>
-</li>
-<li><p>use <code>Object.is</code> compare new and old</p>
-</li>
-</ul>
-<h2 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h2><ul>
-<li>requeire a function as child</li>
-<li>return a React Node</li>
-<li>if there is no Provider, use <code>defaultValue</code></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>typescript 盲区汇总</title>
-    <url>/2022/05/30/ts-2/</url>
-    <content><![CDATA[<h2 id="in-operator-narrow-type"><a href="#in-operator-narrow-type" class="headerlink" title="in operator: narrow type"></a><code>in</code> operator: narrow type</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">logPerson</span>(<span class="params">person: Person</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> additionalInformation: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&#x27;role&#x27;</span> <span class="keyword">in</span> person) &#123;</span><br><span class="line">        additionalInformation = person.role;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        additionalInformation = person.occupation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">` - <span class="subst">$&#123;person.name&#125;</span>, <span class="subst">$&#123;person.age&#125;</span>, <span class="subst">$&#123;additionalInformation&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>&#39;role&#39; in person</code> (return true)will let the type narrow to the type who has an optional or requried property <code>role</code></li>
-<li>but return false will let the type narrow to the type who has a optional or missing property <code>role</code></li>
-</ul>
-<h2 id="is-operator-specify-type"><a href="#is-operator-specify-type" class="headerlink" title="is operator: specify type"></a><code>is</code> operator: specify type</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isAdmin</span>(<span class="params">person: Person</span>): <span class="title">person</span> <span class="title">is</span> <span class="title">Admin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> person.type === <span class="string">&#x27;admin&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>you can use the <code>is</code> specify the return value types</li>
-</ul>
-<h2 id="function-overloads-functions-can-be-called-in-different-ways"><a href="#function-overloads-functions-can-be-called-in-different-ways" class="headerlink" title="function overloads: functions can be called in different ways"></a>function overloads: functions can be called in different ways</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// type Person = User | Admin</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;user&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">User</span>[]</span></span><br><span class="line"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">person: Person[], personType: <span class="string">&#x27;admin&#x27;</span>, criteria: Partial&lt;Person&gt;</span>) : <span class="title">Admin</span>[]  </span></span></span><br><span class="line"><span class="function"><span class="function"><span class="title">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterPersons</span>(<span class="params">persons: Person[], personType: <span class="built_in">string</span>, criteria: Partial&lt;Person&gt;</span>): <span class="title">Person</span>[] </span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="function">    <span class="title">return</span> <span class="title">persons</span></span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; person.<span class="keyword">type</span> === personType</span>)</span></span></span><br><span class="line"><span class="function"><span class="function">        .<span class="title">filter</span>(<span class="params">(person) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">let</span> criteriaKeys = <span class="built_in">Object</span>.keys(criteria) <span class="keyword">as</span> (keyof Person)[];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            <span class="keyword">return</span> criteriaKeys.every((fieldName) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">                <span class="keyword">return</span> person[fieldName] === criteria[fieldName];</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">            &#125;);</span></span></span></span><br><span class="line"><span class="params"><span class="function"><span class="function">        &#125;</span>)</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Always prefer parameters with union types instead of overloads when possible</li>
-</ul>
-<h2 id="Object-object"><a href="#Object-object" class="headerlink" title="Object / object / {}"></a>Object / object / {}</h2><p><a href="https://cloud.tencent.com/developer/article/1610691">https://cloud.tencent.com/developer/article/1610691</a></p>
-<h3 id="Object-所有Object类的实例的类型"><a href="#Object-所有Object类的实例的类型" class="headerlink" title="Object - 所有Object类的实例的类型"></a>Object - 所有Object类的实例的类型</h3><p>定义方式：</p>
-<ul>
-<li>Object 接口定义了Object.prototype原型对象上的属性</li>
-<li>Object Constructor 接口定义了Object类的属性</li>
-</ul>
-<h3 id="object-非基本类型"><a href="#object-非基本类型" class="headerlink" title="object - 非基本类型"></a>object - 非基本类型</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> Primitive = <span class="built_in">string</span> | <span class="built_in">boolean</span> | <span class="built_in">number</span> | symble | bigint | <span class="literal">null</span> | <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NonPrimitive = <span class="built_in">object</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="空对象"><a href="#空对象" class="headerlink" title="{} - 空对象"></a>{} - 空对象</h3><p>描述了一个没有成员的对象</p>
-<h2 id="Union-to-intersection-type"><a href="#Union-to-intersection-type" class="headerlink" title="Union to intersection type"></a>Union to intersection type</h2><p><a href="https://fettblog.eu/typescript-union-to-intersection/">https://fettblog.eu/typescript-union-to-intersection/</a></p>
-]]></content>
-      <tags>
-        <tag>typescript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>react lifecycle</title>
-    <url>/2022/06/08/react-8/</url>
-    <content><![CDATA[<p><img src="/images/react/react-lifecycle.png" alt="react-lifecycle"></p>
-
-
-<h2 id="react-lifecycle"><a href="#react-lifecycle" class="headerlink" title="react lifecycle"></a>react lifecycle</h2><p>Each React component has a life cycle, which consists of three phases:</p>
-<ul>
-<li>mounting: that is inserting elements into the DOM</li>
-<li>updating: which invovles methods for updating components in the DOM</li>
-<li>unmounting: that is removing a component from the DOM</li>
-</ul>
-<p>&lt;other lifecycle are deprecated in React 17&gt;</p>
-<h2 id="class-based-and-functional-component"><a href="#class-based-and-functional-component" class="headerlink" title="class-based and functional component"></a>class-based and functional component</h2><h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h3><p>class-based component</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>functional component</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour before the component is added to the DOM</span></span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h3><p>class-based component</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentDidUpdate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>functional component</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Behaviour when has new state / new props</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>useEffect </p>
-<ul>
-<li>the dependence array is a <code>[]</code>, which means only evaluate the hook on mount</li>
-<li>the dependence array is <code>undefined</code>, which will evaluate every re-render</li>
-</ul>
-<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span><span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>functional component</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">       <span class="comment">// Behaviour right before the component is removed from the DOM</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,[])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><table>
-<thead>
-<tr>
-<th>diff</th>
-<th>functional component</th>
-<th>class-based component</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>flexibility</td>
-<td>functional will be more flexbility</td>
-<td>-</td>
-</tr>
-<tr>
-<td>-</td>
-<td>allow the developer to decide how tightly or loosely coupled the lifecycle methods</td>
-<td>any setup that was donw in <code>componentDidMount</code> would have to make values available to <code>componentWillUnmount</code> in order to clean up</td>
-</tr>
-<tr>
-<td>-</td>
-<td>there is no need to do that since the mounting and unmounting logic is enclosed inside the same function scope/ but rig need to have a separation can opt to use two separate hooks</td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-      <tags>
-        <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>位运算 基本知识</title>
-    <url>/2022/06/08/%E4%BD%8D%E8%BF%90%E7%AE%97-1/</url>
-    <content><![CDATA[<h1 id="和位运算说hihi"><a href="#和位运算说hihi" class="headerlink" title="和位运算说hihi"></a>和位运算说hihi</h1><p><a href="https://www.zhihu.com/question/38206659">https://www.zhihu.com/question/38206659</a></p>
-<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="amp-与运算"><a href="#amp-与运算" class="headerlink" title="&amp; 与运算"></a>&amp; 与运算</h3><p>两【个位】都是1，结果才为1，否则为0</p>
-<h3 id="或运算"><a href="#或运算" class="headerlink" title="| 或运算"></a>| 或运算</h3><p>两【个位】都是0，结果才为0，否则为1</p>
-<h3 id="异或运算"><a href="#异或运算" class="headerlink" title="^ 异或运算"></a>^ 异或运算</h3><p>两【个位】相同则为0，不同则为1</p>
-<h3 id="～取反运算"><a href="#～取反运算" class="headerlink" title="～取反运算"></a>～取反运算</h3><p> 0 -&gt; 1 ,1 -&gt; 0</p>
-<h3 id="lt-lt-左移运算"><a href="#lt-lt-左移运算" class="headerlink" title="&lt;&lt; 左移运算"></a>&lt;&lt; 左移运算</h3><p>向左进行移位操作，高位丢弃，低位补0</p>
-]]></content>
-      <tags>
-        <tag>位运算</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>n数之和/差 + 变形</title>
-    <url>/2022/06/16/n%E6%95%B0%E4%B9%8Bxx/</url>
-    <content><![CDATA[<h2 id="数组中的-k-diff-数对"><a href="#数组中的-k-diff-数对" class="headerlink" title="数组中的 k-diff 数对"></a><a href="https://leetcode.cn/problems/k-diff-pairs-in-an-array/">数组中的 k-diff 数对</a></h2><h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><blockquote>
-<p>误区： 双指针不一定是 从两端开始，也可以从一个方向开始，🧠要灵活</p>
-</blockquote>
-<ul>
-<li>从0 开始，有两个指针x , y，找数值对</li>
-<li>规避【不重复】— <code>nums[x] !== nums[x - 1]</code></li>
-<li>规避【k 为 0】— <code>y &lt;= x</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> len = nums.length,res = <span class="number">0</span>, y = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> x = <span class="number">0</span>; x &lt; len - <span class="number">1</span>; x ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x === <span class="number">0</span> || nums[x] !== nums[x - <span class="number">1</span>]) &#123;</span><br><span class="line">           </span><br><span class="line">            y = x</span><br><span class="line">            <span class="keyword">while</span> (y &lt; len &amp;&amp; nums[y] - nums[x] &lt; k || y&lt;=x) &#123;</span><br><span class="line">                y ++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(nums[y] - nums[x] === k) &#123;</span><br><span class="line">                res ++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="哈希✅（最优解）"><a href="#哈希✅（最优解）" class="headerlink" title="哈希✅（最优解）"></a>哈希✅（最优解）</h3><ul>
-<li>只需要遍历一次，用一个set存放 已经走过的value，用res存放 另一个能diff为k的value</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> findPairs = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">let</span> visitor = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">let</span> res =  <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(visitor.has(nums[i] - k)) &#123;</span><br><span class="line">            res.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!visitor.has(nums[i]))&#123;</span><br><span class="line">            visitor.add(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res.size</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="找出第-K-小的数对距离"><a href="#找出第-K-小的数对距离" class="headerlink" title="找出第 K 小的数对距离"></a><a href="https://leetcode.cn/problems/find-k-th-smallest-pair-distance/">找出第 K 小的数对距离</a></h2>]]></content>
-      <tags>
-        <tag>双指针</tag>
-        <tag>哈希</tag>
-        <tag>二分查找</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>层序遍历系列题</title>
-    <url>/2022/06/27/%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86%E7%B3%BB%E5%88%97%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="二叉树层序遍历的关键"><a href="#二叉树层序遍历的关键" class="headerlink" title="二叉树层序遍历的关键"></a>二叉树层序遍历的关键</h1><p><code>list.flatMap(node =&gt; [node.left, node.right]).filter(Boolean)</code></p>
-<h2 id="找到左下角的值"><a href="#找到左下角的值" class="headerlink" title="找到左下角的值"></a><a href="https://leetcode.cn/problems/find-bottom-left-tree-value/">找到左下角的值</a></h2><p>层序遍历 冲到最后一层</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(!root) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> res = root.val</span><br><span class="line">  <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!list.length)&#123;</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    res = list[<span class="number">0</span>].val</span><br><span class="line">    <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">    dfs(nextLevel)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  dfs([root])</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="在每个树行中找最大值"><a href="#在每个树行中找最大值" class="headerlink" title="在每个树行中找最大值"></a><a href="https://leetcode.cn/problems/find-largest-value-in-each-tree-row/">在每个树行中找最大值</a></h2><p>层序遍历， 每层寻找最大值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">       <span class="keyword">return</span> []</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        res.push(<span class="built_in">Math</span>.max(...(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))))</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root])</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="二叉树的锯齿形层序遍历"><a href="#二叉树的锯齿形层序遍历" class="headerlink" title="二叉树的锯齿形层序遍历"></a><a href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/submissions/">二叉树的锯齿形层序遍历</a></h2><p>层序遍历 左右倒 注意reverse()会改变原数组</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> solution = <span class="function">(<span class="params">root</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dfs = <span class="function">(<span class="params">list, time</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!list.length) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(time % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            res.push(list.map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> tempList = [...list]</span><br><span class="line">            res.push(tempList.reverse().map(<span class="function"><span class="params">item</span> =&gt;</span> item.val))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> nextLevel = list.flatMap(<span class="function"><span class="params">node</span> =&gt;</span> [node.left, node.right]).filter(<span class="built_in">Boolean</span>)</span><br><span class="line">        dfs(nextLevel,time + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    dfs([root], <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>dfs</tag>
-        <tag>二叉树</tag>
-        <tag>层序遍历</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态机dp</title>
-    <url>/2022/06/30/%E5%8A%A8%E6%80%81%E6%9C%BAdp/</url>
-    <content><![CDATA[<h2 id="粉刷房子"><a href="#粉刷房子" class="headerlink" title="粉刷房子"></a><a href="https://leetcode.cn/problems/JEj789/">粉刷房子</a></h2><p>💡：每一个都和前一个有关，记住这一点就足够了</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 粗糙版</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(costs.length).fill(<span class="number">0</span>)</span><br><span class="line">        .map(<span class="function">(<span class="params">item</span>) =&gt;</span> [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp[<span class="number">0</span>] = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">2</span>])</span><br><span class="line">            dp[i][<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(dp[i - <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp[dp.length - <span class="number">1</span>])</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>💡： 其实如果只关心上一层的状态，则不需要关心其他层，那dp可以是一个一维数组</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">costs</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//调整下</span></span><br><span class="line"><span class="keyword">var</span> minCost = <span class="function"><span class="keyword">function</span>(<span class="params">costs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dp = [<span class="number">0</span> , <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; costs.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( i === <span class="number">0</span>) &#123;</span><br><span class="line">            dp = costs[<span class="number">0</span>]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> temp = [...dp]</span><br><span class="line">            dp[<span class="number">0</span>] = costs[i][<span class="number">0</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">1</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">1</span>] = costs[i][<span class="number">1</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">2</span>])</span><br><span class="line">            dp[<span class="number">2</span>] = costs[i][<span class="number">2</span>] + <span class="built_in">Math</span>.min(temp[<span class="number">0</span>], temp[<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(...dp)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="最长定差子序列"><a href="#最长定差子序列" class="headerlink" title="最长定差子序列"></a><a href="https://leetcode.cn/problems/longest-arithmetic-subsequence-of-given-difference/submissions/">最长定差子序列</a></h2><p>💡：不一定是数组！也有可能是Map 是Set， 只需要记住，只和前一个的状态有关 （这里的前一个是前一个定差子序列）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">arr</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">difference</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> longestSubsequence = <span class="function"><span class="keyword">function</span>(<span class="params">arr, difference</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.get(arr[i] - difference)) &#123;</span><br><span class="line">            <span class="keyword">const</span> count = map.get(arr[i] - difference) + <span class="number">1</span></span><br><span class="line">            map.set(arr[i],count)</span><br><span class="line">            res = <span class="built_in">Math</span>.max(res,count )</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(arr[i], <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>动态机dp</tag>
       </tags>
   </entry>
 </search>
