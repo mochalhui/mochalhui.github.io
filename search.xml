@@ -889,4 +889,18 @@
         <tag>响应式布局</tag>
       </tags>
   </entry>
+  <entry>
+    <title>dependencies vs devDependencies vs peerDependencies</title>
+    <url>/2022/07/16/dependencies/</url>
+    <content><![CDATA[<p><a href="https://www.yuque.com/docs/share/963e29e1-3314-453f-b417-d8ce543b78cc">https://www.yuque.com/docs/share/963e29e1-3314-453f-b417-d8ce543b78cc</a></p>
+<h2 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a>devDependencies</h2><p><a href="https://docs.npmjs.com/cli/v6/configuring-npm/package-json#devdependencies">https://docs.npmjs.com/cli/v6/configuring-npm/package-json#devdependencies</a><br>顾名思义， 开发时候需要的依赖，比如构建工具 使用<code>-save-dev</code></p>
+<h2 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h2><p>线上代码运行时需要比如react</p>
+<h2 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h2><p>将包依赖的控制权交给用户</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;my-greate-express-middleware&quot;</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;peerDependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;express&quot;</span>: <span class="string">&quot;^3.0.0&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果用户此刻的node_modules中express 5.0.0，npm会询问用户是否继续使用</p>
+]]></content>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
 </search>
