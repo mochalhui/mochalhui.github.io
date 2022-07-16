@@ -841,4 +841,30 @@
         <tag>flex</tag>
       </tags>
   </entry>
+  <entry>
+    <title>移动端异形屏</title>
+    <url>/2022/07/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>工作中遇到的异形屏处理场景</p>
+</blockquote>
+<h2 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h2><h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>安全区域是指一个可视窗口范围，处于安全区域的内容不受圆角（corners）、齐刘海（sensor housing）、 小黑条（home indicator）影响</p>
+<h3 id="viewport-fit"><a href="#viewport-fit" class="headerlink" title="viewport-fit"></a>viewport-fit</h3><p><code>&lt;meta&gt;</code>标签中viewport的扩展，可以调整页面的展现区域</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">viewport-fit: contain // 使页面展示在安全区域内</span><br><span class="line">viewport-fit: cover // 使页面占满屏幕</span><br><span class="line">viewport-fit: auto //</span><br></pre></td></tr></table></figure>
+
+<h3 id="env-兼容-iOS-gt-11-2"><a href="#env-兼容-iOS-gt-11-2" class="headerlink" title="env() /* 兼容 iOS &gt;= 11.2 */"></a>env() /* 兼容 iOS &gt;= 11.2 */</h3><p>目的：告诉浏览器使用屏幕上所有的可用空间，所以使用env()变量</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot; ... viewport-fit=cover&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: </span><br><span class="line">    <span class="built_in">env</span>(safe-area-inset-top, <span class="number">20px</span>)</span><br><span class="line">    <span class="built_in">env</span>(safe-area-inset-right, <span class="number">20px</span>)</span><br><span class="line">    <span class="built_in">env</span>(safe-area-inset-bottom, <span class="number">20px</span>)</span><br><span class="line">    <span class="built_in">env</span>(safe-area-inset-left, <span class="number">20px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li> env(safe-area-inset-top, 20px) means 如果<code>safe-area-inset-top</code> 的值取不到，则用20px<blockquote>
+<p><code>safe-area-inset-*</code>属性确保内容即使在非矩形的视区中也可以完全显示</p>
+</blockquote>
+</li>
+</ul>
+<p>如果item是fixed，需要给元素本身也加上safe-area-inset-top (待验证❓)</p>
+<h3 id="constant-兼容-iOS-lt-11-2"><a href="#constant-兼容-iOS-lt-11-2" class="headerlink" title="constant() /* 兼容 iOS &lt; 11.2 */"></a>constant() /* 兼容 iOS &lt; 11.2 */</h3>]]></content>
+      <tags>
+        <tag>移动端</tag>
+        <tag>异形屏</tag>
+      </tags>
+  </entry>
 </search>
