@@ -867,4 +867,26 @@
         <tag>异形屏</tag>
       </tags>
   </entry>
+  <entry>
+    <title>&lt;meta&gt; 控制viewport</title>
+    <url>/2022/07/16/viewport/</url>
+    <content><![CDATA[<h2 id="移动端-一些需要理解的单位概念"><a href="#移动端-一些需要理解的单位概念" class="headerlink" title="移动端 一些需要理解的单位概念"></a>移动端 一些需要理解的单位概念</h2><h3 id="设备像素-物理像素-physical-pixels"><a href="#设备像素-物理像素-physical-pixels" class="headerlink" title="设备像素/物理像素 (physical pixels)"></a>设备像素/物理像素 (physical pixels)</h3><p>屏幕的实际物理像素点，1920 * 1080 的像素分辨率，代表纵向 1920 横向1080的像素点</p>
+<h3 id="css像素-css-pixel-密度独立像素（density-indepen-pixels-dip-dp）"><a href="#css像素-css-pixel-密度独立像素（density-indepen-pixels-dip-dp）" class="headerlink" title="css像素 (css pixel) / 密度独立像素（density indepen pixels- dip/dp）"></a>css像素 (css pixel) / 密度独立像素（density indepen pixels- dip/dp）</h3><p>css像素是web编程的概念，不是实际存在的。独立于设备用于逻辑上衡量像素的单位</p>
+<h3 id="屏幕尺寸"><a href="#屏幕尺寸" class="headerlink" title="屏幕尺寸"></a>屏幕尺寸</h3><p>屏幕的对角线长度，单位（inch）</p>
+<h3 id="屏幕像素密度-（pixels-per-inch-ppi）"><a href="#屏幕像素密度-（pixels-per-inch-ppi）" class="headerlink" title="屏幕像素密度 （pixels per inch -ppi）"></a>屏幕像素密度 （pixels per inch -ppi）</h3><p>屏幕上每英寸可以展示的物理像素点的数量</p>
+<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><p>物理像素 / 密度独立像素的比值 <br><br>window.devicePixelRatio = 物理像素 / dp</p>
+<h2 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="device-width"><a href="#device-width" class="headerlink" title="device-width"></a><code>device-width</code></h3><p><code>device-width</code>是指这个设备最理想的viewport宽度， 这个宽度是和css像素相同的(dp). [web页面中css像素的值等于device-width的时候，对应到手机上就是沾满全屏的宽度]</p>
+<h3 id="initial-scale"><a href="#initial-scale" class="headerlink" title="initial-scale"></a><code>initial-scale</code></h3><p><code>initail-scale</code>=1.0， 初始化的时候缩放大小是1 ，不缩放</p>
+<h3 id="maximum-scale"><a href="#maximum-scale" class="headerlink" title="maximum-scale"></a><code>maximum-scale</code></h3><p><code>maximum-scale</code>=1.0, 用户最大缩放大小就是1</p>
+<h3 id="user-scalable"><a href="#user-scalable" class="headerlink" title="user-scalable"></a><code>user-scalable</code></h3><p><code>user-scalable</code>=0, 不让用户进行缩放！</p>
+<blockquote>
+<p>添加meta之后，移动端的viewport宽度会从默认的980px变成各个设备的device-width. css中的100% 就等于device-width</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>移动端</tag>
+        <tag>响应式布局</tag>
+      </tags>
+  </entry>
 </search>

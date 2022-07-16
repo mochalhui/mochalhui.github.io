@@ -63,6 +63,73 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-viewport" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/07/16/viewport/">&lt;meta&gt; 控制viewport</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/07/16/viewport/" class="article-date">
+  <time datetime="2022-07-16T12:33:18.000Z" itemprop="datePublished">2022-07-16</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        
+      
+      
+      <h2 id="移动端-一些需要理解的单位概念"><a href="#移动端-一些需要理解的单位概念" class="headerlink" title="移动端 一些需要理解的单位概念"></a>移动端 一些需要理解的单位概念</h2><h3 id="设备像素-物理像素-physical-pixels"><a href="#设备像素-物理像素-physical-pixels" class="headerlink" title="设备像素/物理像素 (physical pixels)"></a>设备像素/物理像素 (physical pixels)</h3><p>屏幕的实际物理像素点，1920 * 1080 的像素分辨率，代表纵向 1920 横向1080的像素点</p>
+<h3 id="css像素-css-pixel-密度独立像素（density-indepen-pixels-dip-dp）"><a href="#css像素-css-pixel-密度独立像素（density-indepen-pixels-dip-dp）" class="headerlink" title="css像素 (css pixel) / 密度独立像素（density indepen pixels- dip/dp）"></a>css像素 (css pixel) / 密度独立像素（density indepen pixels- dip/dp）</h3><p>css像素是web编程的概念，不是实际存在的。独立于设备用于逻辑上衡量像素的单位</p>
+<h3 id="屏幕尺寸"><a href="#屏幕尺寸" class="headerlink" title="屏幕尺寸"></a>屏幕尺寸</h3><p>屏幕的对角线长度，单位（inch）</p>
+<h3 id="屏幕像素密度-（pixels-per-inch-ppi）"><a href="#屏幕像素密度-（pixels-per-inch-ppi）" class="headerlink" title="屏幕像素密度 （pixels per inch -ppi）"></a>屏幕像素密度 （pixels per inch -ppi）</h3><p>屏幕上每英寸可以展示的物理像素点的数量</p>
+<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><p>物理像素 / 密度独立像素的比值 <br><br>window.devicePixelRatio = 物理像素 / dp</p>
+<h2 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="device-width"><a href="#device-width" class="headerlink" title="device-width"></a><code>device-width</code></h3><p><code>device-width</code>是指这个设备最理想的viewport宽度， 这个宽度是和css像素相同的(dp). [web页面中css像素的值等于device-width的时候，对应到手机上就是沾满全屏的宽度]</p>
+<h3 id="initial-scale"><a href="#initial-scale" class="headerlink" title="initial-scale"></a><code>initial-scale</code></h3><p><code>initail-scale</code>=1.0， 初始化的时候缩放大小是1 ，不缩放</p>
+<h3 id="maximum-scale"><a href="#maximum-scale" class="headerlink" title="maximum-scale"></a><code>maximum-scale</code></h3><p><code>maximum-scale</code>=1.0, 用户最大缩放大小就是1</p>
+<h3 id="user-scalable"><a href="#user-scalable" class="headerlink" title="user-scalable"></a><code>user-scalable</code></h3><p><code>user-scalable</code>=0, 不让用户进行缩放！</p>
+<blockquote>
+<p>添加meta之后，移动端的viewport宽度会从默认的980px变成各个设备的device-width. css中的100% 就等于device-width</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/16/viewport/" data-id="cl5nvhho10000fkn0a64x8q6j" class="article-share-link">
+        Share
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" rel="tag">响应式布局</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-移动端" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -1456,64 +1523,6 @@
       </a>
       
 <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-模拟-3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/">leetcode 1716 计算力扣银行的钱</a>
-</h2>
-
-
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" class="article-date">
-  <time datetime="2022-01-15T03:26:44.000Z" itemprop="datePublished">2022-01-15</time>
-</a>
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-      <h2 id="计算力扣银行的钱"><a href="#计算力扣银行的钱" class="headerlink" title="计算力扣银行的钱"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/calculate-money-in-leetcode-bank/">计算力扣银行的钱</a></h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我恨数学！！！！</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> totalMoney = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> x = <span class="built_in">Math</span>.floor(n / <span class="number">7</span>), y = n % <span class="number">7</span></span><br><span class="line">    <span class="keyword">return</span> x * (x + <span class="number">7</span>) * <span class="number">7</span> / <span class="number">2</span> + (y + <span class="number">1</span>) * y / <span class="number">2</span> + x * y</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>最后贴贴我的通过照片 ✅<br><img src="/images/leetcode/1716.png" alt="1716"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/15/%E6%A8%A1%E6%8B%9F-3/" data-id="cl5b2aqh6001enpn0angjh9te" class="article-share-link">
-        Share
-      </a>
-      
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
 
     </footer>
 
