@@ -476,7 +476,7 @@
 
 <h3 id="空对象"><a href="#空对象" class="headerlink" title="{} - 空对象"></a>{} - 空对象</h3><p>描述了一个没有成员的对象</p>
 <h2 id="Union-to-intersection-type"><a href="#Union-to-intersection-type" class="headerlink" title="Union to intersection type"></a>Union to intersection type</h2><p><a href="https://fettblog.eu/typescript-union-to-intersection/">https://fettblog.eu/typescript-union-to-intersection/</a></p>
-]]></content>
+<h2 id="enum-const-enum-as-const"><a href="#enum-const-enum-as-const" class="headerlink" title="enum , const enum , as const"></a><code>enum</code> , <code>const enum</code> , <code>as const</code></h2>]]></content>
       <tags>
         <tag>typescript</tag>
       </tags>
@@ -754,11 +754,40 @@
       </tags>
   </entry>
   <entry>
-    <title>node-1</title>
-    <url>/2022/07/12/node-1/</url>
-    <content><![CDATA[]]></content>
+    <title>node.js 115个实战技巧阅读笔记📒-2</title>
+    <url>/2022/09/05/node-1/</url>
+    <content><![CDATA[<blockquote>
+<ul>
+<li>使用模块</li>
+<li>process &amp; console</li>
+<li>Timers</li>
+</ul>
+</blockquote>
+<h2 id="安装与加载模块-npm"><a href="#安装与加载模块-npm" class="headerlink" title="安装与加载模块 [npm]"></a>安装与加载模块 [npm]</h2><ul>
+<li>npm 搜索模块</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm search xxx</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>npm 下载模块</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 将被安装在./node_modules 下</span></span><br><span class="line">npm install xxx</span><br><span class="line"></span><br><span class="line"><span class="comment">// 希望全局安装</span></span><br><span class="line">npm install xxx -g</span><br></pre></td></tr></table></figure></li>
+<li><p>加载模块</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = requrie(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">// requrie 通常返回一个对象 / 方法 ，取决于模块是如何被创建的</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建与管理模块-基于-commonjs"><a href="#创建与管理模块-基于-commonjs" class="headerlink" title="创建与管理模块 [基于 commonjs]"></a>创建与管理模块 [基于 commonjs]</h2><p>我们期望<code>const express = requrie(&#39;express&#39;)</code>而不是<code>const express = requrie(&#39;express&#39;).express</code>, 所以我们要使用<code>module.exports</code>导出我们的包<br><br /><br>当我们创建一个包并通过<code>module.exports</code>导出</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// xxx.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyClass</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">MyClass.prototype = &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myClass = <span class="keyword">new</span> MyClass()</span><br><span class="line"><span class="built_in">module</span>.exports = myClass</span><br></pre></td></tr></table></figure>
+<p>我们就可以在其他文件中引入</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myClass = requrie(<span class="string">&#x27;./xxx.js&#x27;</span>)</span><br><span class="line">myClass.method() <span class="comment">// &#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对象可以和其他方法属性一起被export出来</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;hh&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.method2= <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;kk&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myclass = <span class="built_in">require</span>(<span class="string">&#x27;./createModule&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> anyName = <span class="built_in">require</span>(<span class="string">&#x27;./module-2&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(myclass.method())</span><br><span class="line"><span class="built_in">console</span>.log(anyName.method())</span><br><span class="line"><span class="built_in">console</span>.log(anyName.method2())</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
         <tag>node</tag>
+        <tag>node.js 115个实战技巧阅读笔记📒</tag>
       </tags>
   </entry>
   <entry>
